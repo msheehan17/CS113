@@ -9,9 +9,9 @@ public class AVLTree < E extends Comparable < E > > extends BinarySearchTreeWith
      */
     private static class AVLNode < E > extends Node < E > {
 
-        public static final int LEFT_HEAVY = -1; // Constant to indicate left heavy.
-        public static final int BALANCED = 0;    // Constant to indicate balanced.
-        public static final int RIGHT_HEAVY = 1; // Constant to indicate right heavy.
+        private static final int LEFT_HEAVY = -1; // Constant to indicate left heavy.
+        private static final int BALANCED = 0;    // Constant to indicate balanced.
+        private static final int RIGHT_HEAVY = 1; // Constant to indicate right heavy.
         private int balance; // Right subtree height - left subtree height.
 
         /**
@@ -20,7 +20,7 @@ public class AVLTree < E extends Comparable < E > > extends BinarySearchTreeWith
          *
          * Constructor implemented with text from the book.
          */
-        public AVLNode ( E item ) {
+        AVLNode ( E item ) {
             super ( item );
             balance = BALANCED;
         }

@@ -1,5 +1,7 @@
-
 package edu.miracosta.cs113;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * PolynomialDriver.java - Allows the user to test out the polynomial calculator.
@@ -27,10 +29,6 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class PolynomialDriver {
 
     // The polynomials the user will be editing/adding.

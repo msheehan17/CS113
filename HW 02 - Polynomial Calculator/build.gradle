@@ -26,4 +26,6 @@ repositories {
 // Access JUnit testing library
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }

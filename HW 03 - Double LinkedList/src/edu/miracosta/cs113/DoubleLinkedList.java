@@ -10,254 +10,174 @@ package edu.miracosta.cs113;
  * @version: 1.0
  *
  */
-
-
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-public class DoubleLinkedList<E> implements List<E> {
+class DoubleLinkedList < E > implements List < E > {
 
-    private Node<E> head = null;
-    private Node<E> tail = null;
+    private Node < E > head, tail;
     private int size = 0;
 
-
-    private static class Node<E> {
-
+    private static class Node < E > {
         private E data;
-        private Node<E> next;
-        private Node<E> prev;
+        private Node<E> next, prev;
 
         private Node ( E data ){
-
             this.data = data;
         }
     }
 
+    private class DoubleListIterator implements ListIterator < E > {
 
-    private class DoubleListIterator implements ListIterator<E> {
-
-        private Node<E> nextItem;
-        private Node<E> lastItemReturned;
+        private Node < E > nextItem, lastItemReturned;
         private int index = 0;
-
 
         /**
          * Full constructor.
          *
          * @param i The index to begin the iterator.
          */
-        public DoubleListIterator ( int i ) {
-
+        DoubleListIterator ( int i ) throws IndexOutOfBoundsException {
             if ( i < 0 || i > size )
                 throw new IndexOutOfBoundsException ( "Cannot access index  " + i +"\n" );
 
-            lastItemReturned = null;
-
             if ( i == size ) {
-
                 index = size;
                 nextItem = null;
-
             } else {
-
                 nextItem = head;
-
                 for ( index = 0; index < i; index++ )
                     nextItem = nextItem.next;
             }
         }
 
-
-        @Override // Note: Method implemented using syntax from book.
-        public void add ( E element ) {
-
+        @Override
+        public void add ( E element ) throws NullPointerException {
             if ( element == null )
                 throw new NullPointerException ( "Null Element.\n" );
 
-            // List is empty (no head).
-            if ( head == null ) {
-
-                head = new Node<>( element );
+            if ( head == null ) { // List is empty (no head).
+                head = new Node < > ( element );
                 tail = head;
-
-            // List iterator is at the beginning of the list.
-            } else if ( nextItem == head ) {
-
-                Node<E> newNode = new Node<>( element );
+            } else if ( nextItem == head ) { // List iterator is at the beginning of the list.
+                Node < E > newNode = new Node < > ( element );
                 newNode.next = nextItem;
                 nextItem.prev = newNode;
                 head = newNode;
-
-            // List iterator is at the end of the list.
-            } else if ( nextItem == null ) {
-
-                Node<E> newNode = new Node<>( element );
+            } else if ( nextItem == null ) { // List iterator is at the end of the list.
+                Node < E > newNode = new Node < > ( element );
                 tail.next = newNode;
                 newNode.prev = tail;
                 tail = newNode;
-
-            // List iterator is not at the beginning, or the end.
-            } else {
-
-                Node<E> newNode = new Node<> ( element );
+            } else { // List iterator is not at the beginning, or the end.
+                Node<E> newNode = new Node < > ( element );
                 newNode.prev = nextItem.prev;
                 nextItem.prev.next = newNode;
                 newNode.next = nextItem;
                 nextItem.prev = newNode;
             }
-
             index++;
             size++;
         }
 
-
-        @Override // Note: Method implemented using syntax from book.
+        @Override
         public boolean hasNext () {
-
             return ( nextItem != null );
         }
 
-
-        @Override // Note: Method implemented using syntax from book (with slight modifications to pass JUnit).
+        @Override
         public boolean hasPrevious () {
-
-            if ( head == null )
-                return false;
-
-            return ( ( nextItem == null && size != 0 ) || nextItem.prev != null );
+            return ( head != null && nextItem.prev != null );
+            //return ( ( nextItem == null && size != 0 ) ||  );
         }
 
-
-        @Override // Note: Method implemented using syntax from book.
-        public E next () {
-
-            if ( ! hasNext () )
+        @Override
+        public E next ( ) throws NoSuchElementException {
+            if ( ! hasNext ( ) )
                 throw new NoSuchElementException ( "Element does not have a value.\n" );
 
             lastItemReturned = nextItem;
             nextItem = nextItem.next;
-
             index++;
 
             return lastItemReturned.data;
         }
 
-
         @Override
-        public int nextIndex () {
-
+        public int nextIndex ( ) {
             return index;
         }
 
-
         @Override // Note: Method implemented using syntax from book.
-        public E previous () {
-
-            if ( ! hasPrevious () )
+        public E previous ( ) throws NoSuchElementException {
+            if ( ! hasPrevious ( ) )
                 throw new NoSuchElementException ( "Element does not have a value.\n" );
 
-            if ( nextItem == null ) {
-
-                nextItem = tail;
-
-            } else {
-
-                nextItem = nextItem.prev;
-            }
-
+            nextItem = ( nextItem == null ) ? tail : nextItem.prev;
             lastItemReturned = nextItem;
-
             index--;
 
             return lastItemReturned.data;
         }
 
-
         @Override
         public int previousIndex () {
-
             return ( index - 1 );
         }
 
-
         @Override
-        public void remove () {
-
+        public void remove ( ) throws IllegalStateException {
             if ( head == null || lastItemReturned == null )
                 throw new IllegalStateException ( "No Elements in the List.\n" );
 
-            // First element in the list.
-            if ( lastItemReturned.prev == null ) {
-
-                // First, and only element in the list.
-                if ( lastItemReturned.next == null ) {
-
-                    clear ();
+            if ( lastItemReturned.prev == null ) { // First element in the list.
+                if ( lastItemReturned.next == null ) { // First, and only element in the list.
+                    clear ( );
                     size++; // Counter the size decrement operator after the loop.
-
                 } else {
-
                     lastItemReturned.next.prev = head;
                     head = lastItemReturned.next;
                 }
-
-            // Last element in the list.
-            } else if ( lastItemReturned.next == null ) {
-
+            } else if ( lastItemReturned.next == null ) { // Last element in the list.
                 lastItemReturned.prev.next = null;
                 tail = lastItemReturned.prev;
-
             } else {
-
                 lastItemReturned.prev.next = lastItemReturned.next;
                 lastItemReturned.next.prev = lastItemReturned.prev;
             }
-
             index--; // Move the cursor back one after the node has been deleted.
             size--;  // Size has gone down one element.
         }
 
-
         @Override
-        public void set ( E element ) {
-
+        public void set ( E element ) throws NullPointerException, IllegalStateException {
             if ( element == null )
                 throw new NullPointerException ( "Null Element.\n" );
 
             if ( lastItemReturned == null )
-                throw new IllegalStateException ();
+                throw new IllegalStateException ( );
 
             lastItemReturned.data = element;
         }
-
-    } // End DoubleListIterator class.
-
+    }
 
     @Override
-    public Iterator<E> iterator () {
-
+    public Iterator < E > iterator ( ) {
         return new DoubleListIterator ( 0 );
     }
 
-
     @Override
-    public ListIterator<E> listIterator () {
-
+    public ListIterator < E > listIterator ( ) {
         return new DoubleListIterator ( 0 );
     }
 
-
     @Override
-    public ListIterator<E> listIterator ( int i ) {
-
+    public ListIterator < E > listIterator ( int i ) {
         return new DoubleListIterator ( i );
     }
 
-
     @Override
-    public boolean add ( E element ) {
-
+    public boolean add ( E element ) throws NullPointerException {
         if ( element == null )
             throw new NullPointerException ( "Null Element.\n" );
 
@@ -265,94 +185,63 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
-
-    @Override // Note: Method implemented using syntax from book.
-    public void add ( int i, E element ) {
-
+    @Override
+    public void add ( int i, E element ) throws NullPointerException {
         if ( element == null )
             throw new NullPointerException ( "Null Element.\n" );
 
         listIterator ( i ).add ( element );
     }
 
-
     @Override
     public void clear () {
-
-        head = null;
-        tail = null;
+        head = tail = null;
         size = 0;
     }
 
-
     @Override
     public boolean equals ( Object o ) {
-
         DoubleLinkedList otherList = null;
 
-        // Null check.
-        if ( o == null ) {
-
+        if ( o == null ) { // Null check.
             return false;
-
-        // Class check.
-        } else if ( this.getClass () != o.getClass () ) {
-
+        } else if ( this.getClass ( ) != o.getClass ( ) ) { // Class check.
             return false;
-
-        // Memory check.
-        } else if ( this == o ) {
-
+        } else if ( this == o ) { // Memory check.
             return true;
+        } else { // Size, then variable check.
+            otherList = ( DoubleLinkedList < E > ) o;
 
-        // Size, then variable check.
-        } else {
-
-            otherList = ( DoubleLinkedList<E> ) o;
-
-            // Check that lists are the same size.
-            if ( this.size () != otherList.size () ) {
-
+            if ( this.size ( ) != otherList.size ( ) ) { // Check that lists are the same size.
                 return false;
-
-            // Check that the list contains the same elements.
-            } else {
-
+            } else { // Check that the list contains the same elements.
                 DoubleListIterator myIterator = new DoubleListIterator ( 0 );
 
-                while ( myIterator.hasNext () ) {
-
+                while ( myIterator.hasNext ( ) ) {
                     if ( ! otherList.contains ( myIterator.next () ) )
                         return false;
                 }
-
                 return true;
             }
         }
     }
 
-
     @Override
-    public boolean contains ( Object o ) {
-
+    public boolean contains ( Object o ) throws NullPointerException {
         if ( o == null )
             throw new NullPointerException ( "Null Object.\n" );
 
         DoubleListIterator myIterator = new DoubleListIterator ( 0 );
 
         while ( myIterator.hasNext () ) {
-
-            if ( o.equals ( myIterator.next () ) )
+            if ( o.equals ( myIterator.next ( ) ) )
                 return true;
         }
-
         return false;
     }
 
-
-    @Override // Note: Method implemented using syntax from book (with slight modifications to pass JUnit).
-    public E get ( int index ) {
-
+    @Override
+    public E get ( int index ) throws IndexOutOfBoundsException {
         DoubleListIterator myIterator = new DoubleListIterator ( index );
 
         if ( ! myIterator.hasNext () || index >= size )
@@ -361,88 +250,71 @@ public class DoubleLinkedList<E> implements List<E> {
         return listIterator ( index ).next ();
     }
 
-
     @Override
-    public int indexOf ( Object o ) {
-
+    public int indexOf ( Object o ) throws NullPointerException {
         if ( o == null )
             throw new NullPointerException ( "Null Object.\n" );
 
         DoubleListIterator myIterator = new DoubleListIterator ( 0 );
 
-        while ( myIterator.hasNext () ) {
-
+        while ( myIterator.hasNext ( ) ) {
             if ( o.equals ( myIterator.next () ) )
                 return myIterator.previousIndex ();
         }
-
         return -1;
     }
 
-
     @Override
-    public int lastIndexOf ( Object o ) {
-
+    public int lastIndexOf ( Object o ) throws NullPointerException {
         if ( o == null )
             throw new NullPointerException ( "Null Object.\n" );
 
         DoubleListIterator myIterator = new DoubleListIterator ( size );
 
-        while ( myIterator.hasPrevious () ) {
-
-            if ( o.equals ( myIterator.previous () ) )
-                return myIterator.nextIndex ();
+        while ( myIterator.hasPrevious ( ) ) {
+            if ( o.equals ( myIterator.previous ( ) ) )
+                return myIterator.nextIndex ( );
         }
-
         return -1;
     }
 
-
     @Override
-    public boolean isEmpty () {
-
+    public boolean isEmpty ( ) {
         return ( size == 0 );
     }
 
-
     @Override
-    public E remove ( int i ) {
+    public E remove ( int i ) throws IndexOutOfBoundsException {
 
         if ( i < 0 || i >= size )
             throw new IndexOutOfBoundsException ( "Cannot access index " + i + "\n" );
 
         DoubleListIterator myIterator = new DoubleListIterator ( i );
 
-        E deletedNode = myIterator.next ();
+        E deletedNode = myIterator.next ( );
 
-        myIterator.remove ();
+        myIterator.remove ( );
 
         return deletedNode;
     }
 
-
     @Override
     public boolean remove ( Object o ) {
-
         boolean found = false; // Determines if the object was found in the list.
 
         DoubleListIterator myIterator = new DoubleListIterator ( 0 );
 
-        while ( myIterator.hasNext () ) {
-
-            if ( o.equals ( myIterator.next () ) ) {
-                remove ( myIterator.previousIndex () );
+        while ( myIterator.hasNext ( ) ) {
+            if ( o.equals ( myIterator.next ( ) ) ) {
+                remove ( myIterator.previousIndex ( ) );
                 found = true;
             }
         }
-
         return found;
     }
 
-
     @Override
-    public E set ( int i, E element ) {
-
+    public E set ( int i, E element ) throws NullPointerException {
         if ( element == null )
             throw new NullPointerException ( "Null Element.\n" );
 
@@ -450,41 +322,35 @@ public class DoubleLinkedList<E> implements List<E> {
 
         E deletedNode = get ( i );
 
-        myIterator.next ();
+        myIterator.next ( );
         myIterator.set ( element );
 
         return deletedNode;
     }
 
-
     @Override
-    public int size () {
-
+    public int size ( ) {
         return size;
     }
 
-
     @Override
     public String toString() {
-
         if ( head == null )
             return "[]";
 
-        String result = "[";
+        StringBuilder sb = new StringBuilder ( "[" );
 
         DoubleListIterator myIterator = new DoubleListIterator ( 0 );
 
         while ( myIterator.hasNext () ) {
-
-            result += myIterator.next ();
-
+            sb.append ( myIterator.next ( ) );
             if ( myIterator.hasNext () )
-                result += ", ";
+                sb .append ( ", " );
         }
 
-        result += "]";
+        sb.append ( "]" );
 
-        return result;
+        return sb.toString ( );
     }
 
 
@@ -494,57 +360,57 @@ public class DoubleLinkedList<E> implements List<E> {
 
 
     @Override
-    public List subList ( int fromIndex, int toIndex ) {
-
-        return null;
+    public List subList ( int fromIndex, int toIndex ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public Object[] toArray () {
-
-        return null;
+    public Object [ ] toArray ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public boolean addAll ( Collection c ) {
-        return false;
+    public boolean addAll ( Collection c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public boolean addAll ( int index, Collection c ) {
-        return false;
+    public boolean addAll ( int index, Collection c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public boolean containsAll ( Collection c ) {
-        return false;
+    public boolean containsAll ( Collection c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public boolean removeAll ( Collection c ) {
-        return false;
+    public boolean removeAll ( Collection c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public void replaceAll ( UnaryOperator operator ) {
+    public void replaceAll ( UnaryOperator operator ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public boolean retainAll ( Collection c ) {
-        return false;
+    public boolean retainAll ( Collection c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public Object[] toArray ( Object[] a ) {
-        return null;
+    public Object[] toArray ( Object [ ] a ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public void sort ( Comparator c ) {
+    public void sort ( Comparator c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 
     @Override
-    public Spliterator spliterator () {
-        return null;
+    public Spliterator spliterator ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException (  );
     }
 }

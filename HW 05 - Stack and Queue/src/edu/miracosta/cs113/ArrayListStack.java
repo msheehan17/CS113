@@ -1,5 +1,8 @@
 package edu.miracosta.cs113;
 
+import java.util.Arrays;
+import java.util.EmptyStackException;
+
 /**
  * ArrayListStack.java - My implementation of a Stack, using an ArrayList. Note: Some methods are implemented from the
  * book.
@@ -21,70 +24,53 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-
-import java.util.Arrays;
-import java.util.EmptyStackException;
-
-public class ArrayListStack<E> implements StackInterface<E> {
+public class ArrayListStack < E > implements StackInterface < E > {
 
     private static final int INITIAL_CAPACITY = 10;
-    private E[] theData;
-    private int topOfStack = -1;
-    private int capacity;
+    private E [ ] theData;
+    private int topOfStack = -1, capacity;
 
-    public ArrayListStack () {
-
+    ArrayListStack ( ) {
         capacity = INITIAL_CAPACITY;
-        theData = ( E[])  new Object[ INITIAL_CAPACITY ];
+        theData = ( E[ ] )  new Object [ INITIAL_CAPACITY ];
     }
 
     @Override
-    public boolean empty () {
-
+    public boolean empty ( ) {
         return ( topOfStack == -1 );
     }
 
-
     @Override
-    public E peek () throws EmptyStackException {
-
-        if ( empty () )
-            throw new EmptyStackException ();
+    public E peek ( ) throws EmptyStackException {
+        if ( empty ( ) )
+            throw new EmptyStackException ( );
 
         return theData [ topOfStack ];
     }
 
-
     @Override // Method implemented with syntax from book.
-    public E pop () throws EmptyStackException {
-
-        if ( empty () )
-            throw new EmptyStackException ();
+    public E pop ( ) throws EmptyStackException {
+        if ( empty ( ) )
+            throw new EmptyStackException ( );
 
         return theData [ topOfStack -- ];
     }
 
-
     @Override // Method implemented with syntax from book.
     public E push ( E element ) {
-
-        if ( topOfStack == theData.length -1 )
-            reallocate ();
+        if ( topOfStack == theData.length - 1 )
+            reallocate ( );
 
         topOfStack++;
         theData [ topOfStack ] = element;
         return element;
     }
 
-
     /**
      * Creates a new array with twice the capacity of the original array and copies information from the old array into
      * a new one. Method implemented with syntax from the book.
      */
-    private void reallocate () {
-
-        capacity *= 2;
-        theData = Arrays.copyOf ( theData, capacity );
+    private void reallocate ( ) {
+        theData = Arrays.copyOf ( theData, ( capacity * 2 ) );
     }
 }

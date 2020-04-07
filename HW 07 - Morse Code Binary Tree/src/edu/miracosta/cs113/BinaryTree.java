@@ -1,5 +1,8 @@
 package edu.miracosta.cs113;
 
+import java.io.Serializable;
+import java.util.Scanner;
+
 /**
  * BinaryTree.java - My implementation of a binary tree class. BinaryTree has an inner class, Node, that represents
  * the individual nodes of the binary tree.
@@ -24,39 +27,29 @@ package edu.miracosta.cs113;
  *        root down the left sub-tree, then down the right subtree) and returns a String representation of said traversal.
  *      -readBinaryTree (Scanner): Returns a copy of the calling BinaryTree.
  */
+public class BinaryTree < E > implements Serializable {
 
-import java.io.Serializable;
-import java.util.Scanner;
-
-public class BinaryTree<E> implements Serializable {
-
-    protected static class Node<E> implements Serializable {
+    protected static class Node < E > implements Serializable {
 
         protected E data;
-        protected Node<E> left;
-        protected Node<E> right;
+        protected Node<E> left, right;
 
-        public Node ( E data ) {
-
+        Node ( E data ) {
             this.data = data;
-            this.left = null;
-            this.right = null;
         }
 
         @Override
-        public String toString() {
-
-            return data.toString ();
+        public String toString ( ) {
+            return data.toString () ;
         }
     }
 
-    protected Node<E> root;
+    protected Node< E > root;
 
     /**
      * Constructs an empty binary tree.
      */
-    public BinaryTree () {
-
+    BinaryTree () {
         root = null;
     }
 
@@ -65,8 +58,7 @@ public class BinaryTree<E> implements Serializable {
      *
      * @param root The root for the new binary tree.
      */
-    protected BinaryTree ( Node<E> root ) {
-
+    protected BinaryTree ( Node < E > root ) {
         this.root = root;
     }
 
@@ -77,19 +69,11 @@ public class BinaryTree<E> implements Serializable {
      * @param leftTree The left node the root will reference.
      * @param rightTree The right node the root will reference.
      */
-    public BinaryTree ( E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree ) {
+    BinaryTree ( E data, BinaryTree < E > leftTree, BinaryTree < E > rightTree ) {
+        root = new Node < > ( data );
 
-        root = new Node<E> ( data );
-
-        if ( leftTree != null )
-            root.left = leftTree.root;
-        else
-            root.left = null;
-
-        if ( rightTree != null )
-            root.right = rightTree.root;
-        else
-            root.right = null;
+        root.left = ( leftTree == null ) ? null : leftTree.root;
+        root.right = ( rightTree == null ) ? null : rightTree.root;
     }
 
     /**
@@ -97,12 +81,8 @@ public class BinaryTree<E> implements Serializable {
      *
      * @return The left subtree.
      */
-    public BinaryTree<E> getLeftSubtree () {
-
-        if ( root != null && root.left != null )
-            return new BinaryTree<E> ( root.left );
-        else
-            return null;
+    BinaryTree<E> getLeftSubtree ( ) {
+        return (root != null && root.left != null) ? new BinaryTree < > ( root.left ) : null;
     }
 
     /**
@@ -110,12 +90,8 @@ public class BinaryTree<E> implements Serializable {
      *
      * @return The right subtree.
      */
-    public BinaryTree<E> getRightSubtree () {
-
-        if ( root != null && root.right != null )
-            return new BinaryTree<E> ( root.right );
-        else
-            return null;
+    BinaryTree<E> getRightSubtree () {
+        return (root != null && root.right != null) ? new BinaryTree < > ( root.right ) : null;
     }
 
     /**
@@ -139,29 +115,26 @@ public class BinaryTree<E> implements Serializable {
     }
 
     @Override
-    public String toString () {
-
-        StringBuilder sb = new StringBuilder ();
+    public String toString ( ) {
+        StringBuilder sb = new StringBuilder ( );
         preOrderTraverse ( root, 1, sb );
-        return sb.toString ();
+        return sb.toString ( );
     }
 
     /**
-     * Performs a preorder traversal of the subtree whose root is node.
+     * Performs a pre-order traversal of the subtree whose root is node.
      *
      * @param node The starting node.
      * @param depth The level of the tree.
      * @param sb The StringBuilder object that appends the nodes.
      */
-    private void preOrderTraverse ( Node<E> node, int depth, StringBuilder sb ) {
-
-        for ( int i = 1; i < depth; i++ )
-            sb.append ( " " );
+    private void preOrderTraverse ( Node < E > node, int depth, StringBuilder sb ) {
+        sb.append ( " ".repeat ( Math.max ( 0, depth - 1 ) ) );
 
         if ( node == null )
             sb.append ( "null\n" );
         else {
-            sb.append ( node.toString () + "\n" );
+            sb.append ( node.toString ( ) + "\n" );
             preOrderTraverse ( node.left, depth + 1, sb );
             preOrderTraverse ( node.right, depth + 1, sb );
         }
@@ -173,18 +146,15 @@ public class BinaryTree<E> implements Serializable {
      * @param scan The Scanner object.
      * @return The appended binary tree.
      */
-    public static BinaryTree<String> readBinaryTree ( Scanner scan ) {
-
-        String data = scan.next ();
+    static BinaryTree<String> readBinaryTree ( Scanner scan ) {
+        String data = scan.next  ();
 
         if ( data.equals ( "null" ) )
             return null;
-
         else {
-
-            BinaryTree<String> leftTree = readBinaryTree ( scan );
-            BinaryTree<String> rightTree = readBinaryTree ( scan );
-            return new BinaryTree<String> ( data, leftTree, rightTree );
+            BinaryTree < String > leftTree = readBinaryTree ( scan );
+            BinaryTree < String > rightTree = readBinaryTree ( scan );
+            return new BinaryTree < > ( data, leftTree, rightTree );
         }
     }
 }

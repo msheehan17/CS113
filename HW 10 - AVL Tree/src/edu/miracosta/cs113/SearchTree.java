@@ -16,33 +16,33 @@ public interface SearchTree < E > {
      * @param item The item to be added.
      * @return True if the item is added to the tree; false if not.
      */
-    public boolean add ( E item );
+    boolean add ( E item );
 
     /**
      * Returns true if target is found in the tree.
      * @param target The target to be found.
      * @return True if the target is found; false if not.
      */
-    public boolean contains ( E target );
+    boolean contains ( E target );
 
     /**
      * Returns a reference to the data in the node that is equal to targte. If no such node is found, returns null.
      * @param target The target to be found.
      * @return A reference to the found target; null if not found.
      */
-    public E find ( E target );
+    E find ( E target );
 
     /**
      * Removes target (if found) from tree and returns it; otherwise, returns null;
      * @param target The target to be deleted.
      * @return A reference to the deleted target.
      */
-    public E delete ( E target );
+    E delete ( E target );
 
     /**
      * Removes target (if found) from tree and returns true; otherwise, returns false;
      * @param target The target to be removed.
      * @return True if the target is removed; false if not.
      */
-    public boolean remove ( E target );
+    boolean remove ( E target );
 }

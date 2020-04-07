@@ -11,14 +11,14 @@ import java.util.Scanner;
  *
  * @param <E> Generic to hold any data type
  */
-public class BinaryTree<E> implements Serializable {
+public class BinaryTree < E > implements Serializable {
     /** The root node of this tree. */
     protected Node<E> root;
 
     /**
      * Default constructor to build an empty BinaryTree.
      */
-    public BinaryTree() {
+    BinaryTree ( ) {
         root = null;
     }
 
@@ -27,7 +27,7 @@ public class BinaryTree<E> implements Serializable {
      *
      * @param root the root node of this tree
      */
-    protected BinaryTree(Node<E> root) {
+    protected BinaryTree( Node < E > root) {
         this.root = root;
     }
 
@@ -38,7 +38,7 @@ public class BinaryTree<E> implements Serializable {
      * @param leftTree left subtree of root
      * @param rightTree right subtree of root
      */
-    public BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) {
+    public BinaryTree ( E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) {
         // Set root to a new Node with the given data
         root = new Node<E>(data);
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Final Group Project - Graph:Dijkstra's Algorithm/Final Group Project - Graph:Dijkstra's Algorithm.iml" filepath="$PROJECT_DIR$/Final Group Project - Graph:Dijkstra's Algorithm/Final Group Project - Graph:Dijkstra's Algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 01 - Detective Jill/HW 01 - Detective Jill.iml" filepath="$PROJECT_DIR$/HW 01 - Detective Jill/HW 01 - Detective Jill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 02 - Polynomial Calculator/HW 02 - Polynomial Calculator.iml" filepath="$PROJECT_DIR$/HW 02 - Polynomial Calculator/HW 02 - Polynomial Calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 03 - Double LinkedList/HW 03 - Double LinkedList.iml" filepath="$PROJECT_DIR$/HW 03 - Double LinkedList/HW 03 - Double LinkedList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 05 - Stack and Queue/HW 05 - Stack and Queue.iml" filepath="$PROJECT_DIR$/HW 05 - Stack and Queue/HW 05 - Stack and Queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 06 - Recursion Change Calculator/src/HW 06 - Recursion Change Calculator.iml" filepath="$PROJECT_DIR$/HW 06 - Recursion Change Calculator/src/HW 06 - Recursion Change Calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 07 - Morse Code Binary Tree/HW 07 - Morse Code Binary Tree.iml" filepath="$PROJECT_DIR$/HW 07 - Morse Code Binary Tree/HW 07 - Morse Code Binary Tree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 08 - HuffManTree/HW 08 - HuffManTree.iml" filepath="$PROJECT_DIR$/HW 08 - HuffManTree/HW 08 - HuffManTree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 09 - HashTable/HW 09 - HashTable.iml" filepath="$PROJECT_DIR$/HW 09 - HashTable/HW 09 - HashTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 10 - AVL Tree/HW 10 - AVL Tree.iml" filepath="$PROJECT_DIR$/HW 10 - AVL Tree/HW 10 - AVL Tree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 01 - Detective Jill/test/test.iml" filepath="$PROJECT_DIR$/HW 01 - Detective Jill/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HW 06 - Recursion Change Calculator/test/test1.iml" filepath="$PROJECT_DIR$/HW 06 - Recursion Change Calculator/test/test1.iml" />
+    </modules>
+  </component>
+</project>

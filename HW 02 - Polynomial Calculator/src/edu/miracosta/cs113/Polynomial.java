@@ -1,5 +1,7 @@
 package edu.miracosta.cs113;
 
+import java.util.LinkedList;
+
 /**
  * Polynomial.java - Concrete class that uses a LinkedList of terms to replicate a polynomial in software.
  *
@@ -21,45 +23,30 @@ package edu.miracosta.cs113;
  * @author Matthew Sheehan
  * @version 1.0
  */
+class Polynomial {
 
-import java.util.LinkedList;
-
-public class Polynomial {
-
-    private LinkedList<Term> polynomialTerms;
-
+    private LinkedList < Term > polynomialTerms;
 
     /**
      * Full / no-argument constructor.
      */
-    public Polynomial () {
-
-        polynomialTerms = new LinkedList<> ();
+    Polynomial ( ) {
+        polynomialTerms = new LinkedList < > ( );
     }
-
 
     /**
      * Copy constructor.
      *
      * @param otherPoly The other polynomial the calling polynomial is copying.
      */
-    public Polynomial ( Polynomial otherPoly ) {
+    Polynomial ( Polynomial otherPoly ) throws NullPointerException {
+        this ( );
 
-        this ();
+        if ( otherPoly == null )
+            throw new NullPointerException ( "Other polynomial null.\n" );
 
-        if ( otherPoly == null ) {
-
-            System.out.println ( "Null object. Terminating program.\n" );
-            System.exit ( 0 );
-        }
-
-        for ( int i = 0; i < otherPoly.getNumTerms (); i++ ) {
-
-            this.polynomialTerms.add ( otherPoly.getTerm ( i ) );
-
-        }
+        this.polynomialTerms.addAll ( otherPoly.polynomialTerms );
     }
-
 
     /**
      * Overrides toString method in Object. Returns a String version of the polynomial.
@@ -67,40 +54,29 @@ public class Polynomial {
      * @return String version of the polynomial.
      */
     @Override
-    public String toString () {
-
-        String thePolynomial = "";
+    public String toString ( ) {
+        StringBuilder sb = new StringBuilder ( );
 
         if ( polynomialTerms.isEmpty () )
             return "0";
 
-        else {
+        else
+            sb.append ( getTerm ( 0 ).toString ( ).substring ( polynomialTerms.get ( 0 ).toString ( ).charAt ( 0 ) == '+' ? 0 : 1 ) );
 
-            if ( polynomialTerms.get (0).toString ().charAt ( 0 ) == '+')
-                thePolynomial += getTerm ( 0 ).toString ().substring ( 1 );
-            else
-                thePolynomial += getTerm ( 0 ).toString ();
-        }
+        for ( int i = 1; i < getNumTerms ( ); i++ )
+            sb.append ( getTerm ( i ).toString ( ) );
 
-        for ( int i = 1; i < getNumTerms (); i++ ) {
-
-            thePolynomial += getTerm ( i ).toString ();
-        }
-
-        return thePolynomial;
+        return sb.toString ( );
     }
-
 
     /**
      * Returns the number of terms in the polynomial.
      *
      * @return The number of terms in the polynomial.
      */
-    public int getNumTerms () {
-
-        return polynomialTerms.size ();
+    int getNumTerms ( ) {
+        return polynomialTerms.size ( );
     }
-
 
     /**
      * Returns a copy of the term at the selected index.
@@ -110,8 +86,7 @@ public class Polynomial {
      * @return
      *      Returns a copy of the term selected.
      */
-    public Term getTerm ( int index ) {
-
+    Term getTerm ( int index ) {
         return new Term ( polynomialTerms.get ( index ) );
     }
 
@@ -119,8 +94,7 @@ public class Polynomial {
     /**
      * Clears the LinkedList of all terms.
      */
-    public void clear () {
-
+    void clear ( ) {
         polynomialTerms.clear ();
     }
 
@@ -131,10 +105,9 @@ public class Polynomial {
      * all terms to determine if the argument exponent is the largest (by using compareTo). If so, it will take the
      * index of the term with the lesser exponent.
      *
-     * @param t
-     *      The term being added to the polynomial.
+     * @param t The term being added to the polynomial.
      */
-    public void addTerm ( Term t ) {
+    void addTerm ( Term t ) {
 
         int index = -1;
         int sumOfCoefficients = 0;
@@ -142,7 +115,6 @@ public class Polynomial {
 
         // If the LinkedList is empty, simply add the term.
         if ( polynomialTerms.isEmpty () )
-
             polynomialTerms.add ( t );
 
         else {
@@ -193,9 +165,8 @@ public class Polynomial {
      * @param otherPoly
      *      The argument polynomial being added to the calling polynomial.
      */
-    public void add ( Polynomial otherPoly ) {
-
-        for ( int i = 0; i < otherPoly.getNumTerms (); i++ )
-            addTerm ( otherPoly.getTerm ( i ) );
+    void add ( Polynomial otherPoly ) {
+        for ( Term t : otherPoly.polynomialTerms )
+            addTerm ( t );
     }
 }

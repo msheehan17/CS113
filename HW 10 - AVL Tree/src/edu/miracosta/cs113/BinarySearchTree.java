@@ -5,7 +5,7 @@ public class BinarySearchTree < E extends Comparable < E > >  extends BinaryTree
     protected boolean addReturn; // Return value from recursive add method.
     protected E deleteReturn; // Return value from recursive delete method.
 
-    public BinarySearchTree ( ) {
+    BinarySearchTree ( ) {
         super ( );
     }
 
@@ -26,7 +26,7 @@ public class BinarySearchTree < E extends Comparable < E > >  extends BinaryTree
     private Node < E > add ( Node < E > localRoot, E item ) {
         if ( localRoot == null ) {
             addReturn = true;
-            return new Node<> ( item );
+            return new Node < > ( item );
         } else if ( item.compareTo ( localRoot.data ) == 0 ) {
             addReturn = false;
             return localRoot;

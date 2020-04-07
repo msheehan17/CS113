@@ -1,5 +1,11 @@
 package edu.miracosta.cs113;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * MorseCodeTree.java - A class for translating morse code by use of a binary tree.
  *
@@ -19,24 +25,15 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class MorseCodeTree extends BinaryTree<Character> implements Serializable {
 
-    private static final String FILE_NAME =
-    "/Users/matthewsheehan/Desktop/Code/cs113-hw07-morsecodetree-msheehan17/src/edu/miracosta/cs113/Morse_Code.txt";
+    private static final String FILE_NAME = "";
 
     /**
      * Creates a new MorseCodeTree and adds letters to the tree.
      */
     public MorseCodeTree ( ) {
-
-        root = new Node<>(' ');
+        root = new Node < >(' ');
         readMorseCodeTree ();
     }
 
@@ -56,45 +53,39 @@ public class MorseCodeTree extends BinaryTree<Character> implements Serializable
      * @throws IllegalArgumentException If the String contains illegal characters, or exceed legal String length (4).
      */
     public String translateFromMorseCode ( String morseCode ) throws NullPointerException, IllegalArgumentException {
-
-        // The String is empty or null.
-        if ( morseCode.equals ( "" ) || morseCode == null )
+        if ( morseCode.isEmpty ( ) )  // The String is empty or null.
             throw new NullPointerException ( "Null String." );
 
         // Check if any invalid characters exist in the String.
         for ( int i = 0; i < morseCode.length (); i++ ) {
-
             if ( morseCode.charAt ( i ) != '*' && morseCode.charAt ( i ) != '-' && morseCode.charAt ( i ) != ' ' )
                 throw new IllegalArgumentException ( "The String may only contain spaces, \"*\", and \"-\"." );
         }
 
         // Split the code segments into an array of Strings and determine if any segments exceed the allotted length ( max length: 4 ).
-        String[] codeSegments = morseCode.split ( " " );
+        String [ ] codeSegments = morseCode.split ( " " );
 
         for ( String segment : codeSegments ) {
-
-            if ( segment.length () > 4 )
+            if ( segment.length ( ) > 4 )
                 throw new IllegalArgumentException ( "Morse code segment too long.\n" );
         }
 
         // After each case has been check, the translation can begin.
-        String translatedString = "";
+        StringBuilder translatedString = new StringBuilder (  );
 
         for ( String segment : codeSegments ) {
-
             Node<Character> currentNode = this.root; // The starting node for translation.
 
             for ( int i = 0; i < segment.length (); i++ ){
-
                 if ( segment.charAt ( i ) == '*' )
                     currentNode = currentNode.left;
                 else if ( segment.charAt ( i ) == '-' )
                     currentNode = currentNode.right;
             }
 
-            translatedString += currentNode.data;
+            translatedString.append ( currentNode.data );
         }
-        return translatedString;
+        return translatedString.toString ( );
     }
 
     /**
@@ -105,27 +96,23 @@ public class MorseCodeTree extends BinaryTree<Character> implements Serializable
      * determine which node to check next. For every character equal to '-', thr right side will be checked instead of
      * the left.
      */
-    private void readMorseCodeTree () {
-
+    private void readMorseCodeTree ( ) {
         Scanner input = null;
 
         try {
-
             input = new Scanner ( new FileInputStream ( FILE_NAME ) );
-
-        } catch ( FileNotFoundException e ) {
-
+        }
+        catch ( FileNotFoundException e ) {
             System.out.println ( FILE_NAME + " file not found." );
         }
 
-        ArrayList<String> codeSegments = new ArrayList<> ( 26 );
+        ArrayList < String > codeSegments = new ArrayList < > ( 26 );
 
         // Break up each line and put it in an ArrayList.
         while ( input.hasNext () )
             codeSegments.add ( input.nextLine (  ) );
 
         for ( String line: codeSegments ) {
-
             Node<Character> currentNode = root;
 
             char newData = line.charAt ( 0 );   // The letter that will be the data for the node.
@@ -133,32 +120,19 @@ public class MorseCodeTree extends BinaryTree<Character> implements Serializable
 
             // Begin traversing the tree and adding data to the nodes.
             for ( int i = 0; i < code.length (); i++ ) {
-
-                // Go left.
-                if ( code.charAt ( i ) == '*' ) {
-
-                    // Node is empty, add data.
-                    if ( currentNode.left == null )
-                        currentNode.left = new Node<> ( newData );
-
-                        // Node is not empty, left node becomes the current node.
-                    else
+                if ( code.charAt ( i ) == '*' ) { // Go left.
+                    if ( currentNode.left == null ) // Node is empty, add data.
+                        currentNode.left = new Node < > ( newData );
+                    else // Node is not empty, left node becomes the current node.
                         currentNode = currentNode.left;
-                }
-
-                // Go right.
-                else if ( code.charAt ( i ) == '-' ) {
-
-                    // Node is empty, add data.
-                    if ( currentNode.right == null )
-                        currentNode.right = new Node<> ( newData );
-                        // Node is not empty, right node becomes the current node.
-                    else
+                } else if ( code.charAt ( i ) == '-' ) { // Go right.
+                    if ( currentNode.right == null ) // Node is empty, add data.
+                        currentNode.right = new Node < > ( newData );
+                    else // Node is not empty, right node becomes the current node.
                         currentNode = currentNode.right;
                 }
             }
         }
         input.close ();
     }
-
 } // End class.

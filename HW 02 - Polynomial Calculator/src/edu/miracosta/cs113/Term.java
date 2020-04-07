@@ -29,27 +29,21 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
 public class Term implements Cloneable, Comparable {
 
     private int coefficient; // The coefficient of the term.
     private int exponent;    // The exponent of the term (the power the term is being raised to).
 
-
     /**
      * Full constructor.
      *
-     * @param coefficient
-     *      The coefficient of the term.
-     * @param exponent
-     *      The term's exponent.
+     * @param coefficient The coefficient of the term.
+     * @param exponent The term's exponent.
      */
     public Term ( int coefficient, int exponent ) {
-
-        setCoefficient( coefficient );
-        setExponent ( exponent );
+        this.coefficient = coefficient;
+        this.exponent = exponent;
     }
-
 
     /**
      * Full constructor that takes in a String argument instead of two integer arguments. The String will be checked to
@@ -60,7 +54,7 @@ public class Term implements Cloneable, Comparable {
      * @param stringTerm
      *      The term in String form.
      */
-    public Term ( String stringTerm ) {
+     Term ( String stringTerm ) {
 
         String coefficientHalf = null; // The portion that will hold the coefficient String.
         String exponentHalf = null;    // The portion that will hold the exponent String.
@@ -96,12 +90,10 @@ public class Term implements Cloneable, Comparable {
         setCoefficient ( determineCoefficient ( coefficientHalf ) );
     }
 
-
     /**
      * No-argument constructor. Sets the term's coefficient and exponent to 1.
      */
-    public Term () {
-
+    Term ( ) {
         this( 1, 1 );
     }
 
@@ -109,23 +101,19 @@ public class Term implements Cloneable, Comparable {
     /**
      * Copy constructor.
      *
-     * @param otherTerm
-     *      The reference variable in which the calling object will copy the instance/reference variables from.
+     * @param otherTerm The reference variable in which the calling object will copy the instance/reference variables from.
      */
-    public Term ( Term otherTerm ) {
-
-        this( otherTerm.getCoefficient(), otherTerm.getExponent() );
+    Term ( Term otherTerm ) {
+        this ( otherTerm.getCoefficient ( ), otherTerm.getExponent ( ) );
     }
 
 
     /**
      * Accessor method for the term's coefficient.
      *
-     * @return
-     *      The term's coefficient.
+     * @return The term's coefficient.
      */
-    public int getCoefficient () {
-
+    int getCoefficient ( ) {
         return coefficient;
     }
 
@@ -133,11 +121,9 @@ public class Term implements Cloneable, Comparable {
     /**
      * Accessor method for the term's exponent.
      *
-     * @return
-     *      The term's exponent.
+     * @return The term's exponent.
      */
-    public int getExponent () {
-
+    int getExponent ( ) {
         return exponent;
     }
 
@@ -145,11 +131,9 @@ public class Term implements Cloneable, Comparable {
     /**
      * Mutator method for the term's coefficient.
      *
-     * @param coefficient
-     *      The term's coefficient.
+     * @param coefficient The term's coefficient.
      */
-    public void setCoefficient ( int coefficient ) {
-
+    void setCoefficient ( int coefficient ) {
         this.coefficient = coefficient;
     }
 
@@ -157,11 +141,9 @@ public class Term implements Cloneable, Comparable {
     /**
      * Mutator method for the term's exponent.
      *
-     * @param exponent
-     *      The term's exponent.
+     * @param exponent The term's exponent.
      */
-    public void setExponent ( int exponent ) {
-
+    void setExponent ( int exponent ) {
         this.exponent = exponent;
     }
 
@@ -169,15 +151,12 @@ public class Term implements Cloneable, Comparable {
     /**
      * A mutator methods that allows all instance variables to be set at the same time.
      *
-     * @param coefficient
-     *      The term's coefficient.
-     * @param exponent
-     *      The term's exponent.
+     * @param coefficient The term's coefficient.
+     * @param exponent The term's exponent.
      */
-    public void setAll ( int coefficient, int exponent ) {
-
-        setCoefficient( coefficient );
-        setExponent( exponent );
+    void setAll ( int coefficient, int exponent ) {
+        this.coefficient = coefficient;
+        this.exponent = exponent;
     }
 
 
@@ -255,23 +234,19 @@ public class Term implements Cloneable, Comparable {
      */
     @Override
     public boolean equals ( Object o ) {
-
         Term other;
 
-        // Memory check.
-        if ( this == o )
+        if ( this == o ) // Memory check.
             return true;
 
-        // Null check.
-        if ( o == null )
+        if ( o == null ) // Null check.
             return false;
 
         // Class check / Compare instance variables should the object derive from the same class.
-        if ( this.getClass() == o.getClass() ) {
-
+        if ( this.getClass ( ) == o.getClass ( ) ) {
             other = ( Term ) o;
-            return ( this.getCoefficient() == other.getCoefficient() && this.getExponent() == other.getExponent() );
-
+            return ( this.getCoefficient ( ) == other.getCoefficient ( ) &&
+                     this.getExponent ( ) == other.getExponent ( ) );
         } else
             return false;
     }
@@ -327,9 +302,8 @@ public class Term implements Cloneable, Comparable {
      *      A clone of the object that contains the same instance variables as the calling object.
      */
     @Override
-    public Object clone () throws CloneNotSupportedException{
-
-        return super.clone ();
+    public Object clone ( ) throws CloneNotSupportedException{
+        return super.clone ( );
     }
 
 

@@ -1,5 +1,10 @@
 package edu.miracosta.cs113;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+
 /**
  * CircularArrayQueue.java - My implementation of a CircularArrayQueue. Note: Some methods are implemented from the book.
  *
@@ -23,36 +28,26 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
+public class CircularArrayQueue < E > implements Queue < E > {
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Queue;
-
-public class CircularArrayQueue<E> implements Queue<E> {
-
-    private E[] theData; // The underlying array that will hold the information.
+    private E [ ] theData; // The underlying array that will hold the information.
     private int capacity, front, rear, size; // The characteristics of the CircularArrayQueue.
 
-    public CircularArrayQueue ( int initialCapacity ) {
-
+    CircularArrayQueue ( int initialCapacity ) throws IllegalArgumentException {
         if ( initialCapacity < 0 )
             throw new IllegalArgumentException (  );
 
         capacity = initialCapacity;
 
-        theData = ( E[] ) new Object [ capacity ];
+        theData = ( E [ ] ) new Object [ capacity ];
 
-        front = 0;
+        front = size = 0;
 
         rear = capacity - 1;
-
-        size = 0;
     }
 
     @Override
     public boolean add ( E element ) throws NullPointerException {
-
         if ( element == null )
             throw new NullPointerException ( "Null element.\n" );
 
@@ -60,25 +55,21 @@ public class CircularArrayQueue<E> implements Queue<E> {
             reallocate ();
 
         size++;
-        rear = ( rear + 1 ) % capacity;
+        rear = ( ( rear + 1 ) % capacity );
         theData [ rear ] = element;
         return true;
     }
 
-
     @Override
-    public E element () throws NoSuchElementException {
-
+    public E element ( ) throws NoSuchElementException {
         if ( size == 0 )
             throw new NoSuchElementException ();
 
         return theData [ front ];
     }
 
-
-    @Override // Method implemented with syntax from book, with some modifications.
+    @Override
     public boolean offer ( E element ) throws NullPointerException {
-
         if ( element == null )
             throw new NullPointerException ( "Null element.\n" );
 
@@ -86,11 +77,10 @@ public class CircularArrayQueue<E> implements Queue<E> {
             reallocate ();
 
         size++;
-        rear = ( rear + 1 ) % capacity;
+        rear = ( ( rear + 1 ) % capacity ) ;
         theData [ rear ] = element;
         return true;
     }
-
 
     @Override
     public E peek () {
@@ -101,28 +91,24 @@ public class CircularArrayQueue<E> implements Queue<E> {
         return theData [ front ];
     }
 
-
-    @Override // Method implemented with syntax from book.
-    public E poll () {
-
+    @Override
+    public E poll ( ) {
         if ( size == 0 )
             return null;
 
         E result = theData [ front ];
-        front = ( front + 1 ) % capacity;
+        front = ( ( front + 1 ) % capacity );
         size--;
         return result;
     }
 
-
     @Override
-    public E remove () throws NoSuchElementException {
-
+    public E remove ( ) throws NoSuchElementException {
         if ( size == 0 )
             throw new NoSuchElementException ();
 
         E result = theData [ front ];
-        front = ( front + 1 ) % capacity;
+        front = ( ( front + 1 ) % capacity );
         size--;
         return result;
     }
@@ -154,86 +140,72 @@ public class CircularArrayQueue<E> implements Queue<E> {
     // The following methods are required from Collections, but will not be implemented.
 
     @Override
-    public boolean addAll ( Collection<? extends E> c ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean addAll ( Collection < ? extends E > c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public void clear () {
-
-        throw new UnsupportedOperationException ();
+    public void clear ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean contains ( Object o ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean contains ( Object o ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean containsAll ( Collection<?> c ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean containsAll ( Collection < ? > c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean equals ( Object obj ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean equals ( Object obj ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public int hashCode () {
-
-        throw new UnsupportedOperationException ();
+    public int hashCode ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean isEmpty () {
-
-        throw new UnsupportedOperationException ();
+    public boolean isEmpty ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public Iterator<E> iterator () {
-
-        throw new UnsupportedOperationException ();
+    public Iterator < E > iterator ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean remove ( Object o ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean remove ( Object o ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean removeAll ( Collection<?> c ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean removeAll ( Collection < ? > c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public boolean retainAll ( Collection<?> c ) {
-
-        throw new UnsupportedOperationException ();
+    public boolean retainAll ( Collection < ? > c ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public int size () {
-
-        throw new UnsupportedOperationException ();
+    public int size ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException () ;
     }
 
     @Override
-    public Object[] toArray () {
-
-        throw new UnsupportedOperationException ();
+    public Object [ ] toArray ( ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 
     @Override
-    public <T> T[] toArray ( T[] a ) {
-
-        throw new UnsupportedOperationException ();
+    public < T > T [ ] toArray ( T [ ] a ) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException ( );
     }
 }

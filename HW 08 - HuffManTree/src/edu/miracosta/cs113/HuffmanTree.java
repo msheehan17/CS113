@@ -1,5 +1,11 @@
 package edu.miracosta.cs113;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * HuffmanTree.java - My implementation of Huffman Tree.
  *
@@ -19,13 +25,6 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
 public class HuffmanTree implements Serializable, HuffmanInterface {
 
     private static class HuffData implements Serializable {
@@ -33,7 +32,7 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
         private int weight; // The weight (or frequency) assigned to the symbol.
         private Character symbol; // The symbol.
 
-        private HuffData ( int weight, Character symbol ){
+        private HuffData ( int weight, Character symbol ) {
             this.weight = weight;
             this.symbol = symbol;
         }
@@ -41,11 +40,8 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
 
     private static class CompareHuffmanTrees implements Comparator < BinaryTree < HuffData > > {
 
-        public int compare ( BinaryTree<HuffData> treeLeft, BinaryTree<HuffData> treeRight ) {
-
-            double wLeft = treeLeft.getData ().weight;
-            double wRight = treeRight.getData ().weight;
-            return Double.compare ( wLeft, wRight );
+        public int compare ( BinaryTree < HuffData > treeLeft, BinaryTree < HuffData > treeRight ) {
+            return Double.compare ( treeLeft.getData ( ).weight, treeRight.getData ( ).weight );
         }
     }
 
@@ -88,7 +84,7 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
         }
 
         // Trim down the ArrayList.
-        nodes.trimToSize ();
+        nodes.trimToSize ( );
 
         // Create an array containing the non-null values.
         HuffData [ ] nonNullNodes = new HuffData [ nodes.size ( ) ];
@@ -122,7 +118,6 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
      * Note: This method was implemented from text in the book.
      */
     private void buildTree ( HuffData [ ] symbols ) {
-
         // The priority queue for storing our binary trees. The CompareHuffmanTree object will dictate the natural order.
         Queue < BinaryTree < HuffData > > theQueue = new PriorityQueue < > ( symbols.length, new CompareHuffmanTrees ( ) );
 
@@ -133,12 +128,10 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
         }
 
         // Build the tree.
-        while ( theQueue.size () > 1 ) {
+        while ( theQueue.size ( ) > 1 ) {
             BinaryTree < HuffData > left = theQueue.poll ( );
             BinaryTree < HuffData > right = theQueue.poll ( );
-            int wl = left.getData ( ).weight;
-            int wr = right.getData ( ).weight;
-            HuffData sum = new HuffData ( ( wl + wr ), null );
+            HuffData sum = new HuffData ( ( left.getData ( ).weight + right.getData ( ).weight ), null );
             BinaryTree < HuffData > newTree = new BinaryTree < > ( sum, left, right );
             theQueue.offer ( newTree );
         }
@@ -153,12 +146,11 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
      *
      * Note: This method was implemented from text (from printCode) in the book, with some modifications.
      */
-    private void getCode ( StringBuilder sb, String code, BinaryTree<HuffData> tree ) {
+    private void getCode ( StringBuilder sb, String code, BinaryTree < HuffData > tree ) {
         HuffData theData = tree.getData ( );
         if ( theData.symbol != null ) {
             sb.append ( theData.symbol + ":" + code + "#");
         } else {
-
             getCode ( sb, ( code + "0" ), tree.getLeftSubtree ( ) );
             getCode ( sb, ( code + "1" ), tree.getRightSubtree ( ) );
         }

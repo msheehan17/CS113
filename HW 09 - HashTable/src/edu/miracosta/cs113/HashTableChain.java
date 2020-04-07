@@ -1,5 +1,7 @@
 package edu.miracosta.cs113;
 
+import java.util.*;
+
 /**
  * HashTableChain.java - My implementation of a chaining hash table.
  *
@@ -18,12 +20,9 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-import java.util.*;
-
 public class HashTableChain < K, V >  implements Map < K, V > {
 
-    private LinkedList < Entry < K, V > > [ ] table; // The table.
+    private LinkedList < Entry < K, V > >[ ] table; // The table.
     private int numKeys; // The number of keys (entries) in the table.
     private static final int CAPACITY = 101; // The size of the table.
     private static final double LOAD_THRESHOLD = 3.0; // The max load factor.
@@ -43,7 +42,7 @@ public class HashTableChain < K, V >  implements Map < K, V > {
          * @param key The key.
          * @param value The value.
          */
-        public Entry ( K key, V value ) {
+        Entry ( K key, V value ) {
             this.key = key;
             this.value = value;
         }

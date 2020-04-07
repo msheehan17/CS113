@@ -16,7 +16,7 @@ public interface HuffmanInterface {
      * @param codedMessage The compressed message based on this Huffman tree's encoding
      * @return The given message in its decoded form
      */
-    public String decode(String codedMessage);
+    String decode ( String codedMessage );
 
     /**
      * Outputs the message encoded from the generated Huffman tree.
@@ -25,6 +25,5 @@ public interface HuffmanInterface {
      * @param message The message to be decoded
      * @return The given message in its specific Huffman encoding of '1's and '0's
      */
-    public String encode(String message);
-
+    String encode ( String message );
 } // End of class HuffmanTree

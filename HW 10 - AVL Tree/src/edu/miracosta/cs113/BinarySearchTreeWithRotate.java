@@ -6,7 +6,7 @@ package edu.miracosta.cs113;
  *
  */
 @SuppressWarnings("serial")
-public class BinarySearchTreeWithRotate < E extends Comparable < E > > extends  BinarySearchTree < E > {
+class BinarySearchTreeWithRotate < E extends Comparable < E > > extends  BinarySearchTree < E > {
 
     /**
      * Method to perform right rotation.
