@@ -7,21 +7,21 @@ public interface StackInterface < E > {
      *
      * @return true if empty, false otherwise
      */
-    public boolean empty ( );
+    boolean empty ( );
 
     /**
      * Returns the object at the top of the stack without removing it
      *
      * @return reference (shallow copy) of object at top of stack
      */
-    public E peek ( );
+    E peek ( );
 
     /**
      * Returns the object at the top of the stack and removes it
      *
      * @return reference of removed object from top of stack
      */
-    public E pop ( );
+    E pop ( );
 
     /**
      * Pushes an item onto the top of the stack and returns the item pushed.
@@ -29,5 +29,5 @@ public interface StackInterface < E > {
      * @param obj object to push onto top of stack
      * @return item that was pushed
      */
-    public E push ( E obj );
+    E push ( E obj );
 }

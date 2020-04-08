@@ -1,5 +1,8 @@
 package edu.miracosta.cs113;
 
+import java.util.*;
+import java.util.function.UnaryOperator;
+
 /**
  * DoubleLinkedList.java - My implementation of a doubly-linked list. As suggested by the HW prompt, some methods
  * implemented in this class come from the textbook/classroom power points.
@@ -10,9 +13,6 @@ package edu.miracosta.cs113;
  * @version: 1.0
  *
  */
-import java.util.*;
-import java.util.function.UnaryOperator;
-
 class DoubleLinkedList < E > implements List < E > {
 
     private Node < E > head, tail;
@@ -99,7 +99,6 @@ class DoubleLinkedList < E > implements List < E > {
             lastItemReturned = nextItem;
             nextItem = nextItem.next;
             index++;
-
             return lastItemReturned.data;
         }
 
@@ -116,7 +115,6 @@ class DoubleLinkedList < E > implements List < E > {
             nextItem = ( nextItem == null ) ? tail : nextItem.prev;
             lastItemReturned = nextItem;
             index--;
-
             return lastItemReturned.data;
         }
 
@@ -285,7 +283,6 @@ class DoubleLinkedList < E > implements List < E > {
 
     @Override
     public E remove ( int i ) throws IndexOutOfBoundsException {
-
         if ( i < 0 || i >= size )
             throw new IndexOutOfBoundsException ( "Cannot access index " + i + "\n" );
 
@@ -347,10 +344,7 @@ class DoubleLinkedList < E > implements List < E > {
             if ( myIterator.hasNext () )
                 sb .append ( ", " );
         }
-
-        sb.append ( "]" );
-
-        return sb.toString ( );
+        return sb.append ( "]" ).toString ( );
     }
 
 

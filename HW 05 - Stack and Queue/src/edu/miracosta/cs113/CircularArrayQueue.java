@@ -52,7 +52,7 @@ public class CircularArrayQueue < E > implements Queue < E > {
             throw new NullPointerException ( "Null element.\n" );
 
         if ( size == capacity )
-            reallocate ();
+            reallocate ( );
 
         size++;
         rear = ( ( rear + 1 ) % capacity );
@@ -74,7 +74,7 @@ public class CircularArrayQueue < E > implements Queue < E > {
             throw new NullPointerException ( "Null element.\n" );
 
         if ( size == capacity )
-            reallocate ();
+            reallocate ( );
 
         size++;
         rear = ( ( rear + 1 ) % capacity ) ;
@@ -83,8 +83,7 @@ public class CircularArrayQueue < E > implements Queue < E > {
     }
 
     @Override
-    public E peek () {
-
+    public E peek ( ) {
         if ( size == 0 )
             return null;
 
@@ -119,23 +118,19 @@ public class CircularArrayQueue < E > implements Queue < E > {
      * a new one. Method implemented with syntax from the book.
      */
     private void reallocate () {
-
         int newCapacity = 2 * capacity;
         E [] newData = ( E[] ) new Object [ newCapacity ];
         int j = front;
 
         for ( int i = 0; i < size; i++ ) {
-
             newData [ i ] = theData [ j ];
             j = ( j + 1 ) % capacity;
         }
-
         front = 0;
         rear = size - 1;
         capacity = newCapacity;
         theData = newData;
     }
-
 
     // The following methods are required from Collections, but will not be implemented.
 

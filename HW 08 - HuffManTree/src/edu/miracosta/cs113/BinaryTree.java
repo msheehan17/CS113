@@ -89,7 +89,7 @@ public class BinaryTree < E > implements Serializable {
      * @param scan The Scanner attached to the input file
      * @return The binary tree constructed from the given input
      */
-    static BinaryTree < String > readBinaryTree (Scanner scan ) {
+    static BinaryTree < String > readBinaryTree ( Scanner scan ) {
         // Read a line and trim leading and trailing spaces.
         if ( ! scan.hasNext ( ) )
             return null;
@@ -114,8 +114,7 @@ public class BinaryTree < E > implements Serializable {
      * @param sb The String buffer which accumulates the output
      */
     private void preOrderTraverse( Node < E > node, int depth, StringBuilder sb ) {
-        for ( int i = 1; i < depth; i++)
-            sb.append ( " " );
+        sb.append ( " ".repeat ( Math.max ( 0, depth - 1 ) ) );
 
         if ( node == null )
             sb.append ( "null\n" );
@@ -130,7 +129,7 @@ public class BinaryTree < E > implements Serializable {
     @Override
     public String toString ( ) {
         StringBuilder sb = new StringBuilder ( );
-        preOrderTraverse(root, 1, sb);
+        preOrderTraverse (root, 1, sb);
         return sb.toString ( );
     }
 
@@ -150,7 +149,7 @@ public class BinaryTree < E > implements Serializable {
          *
          * @param data The data to hold within the node
          */
-        Node(E data) {
+        Node ( E data ) {
             this.data = data;
         }
 
@@ -158,5 +157,5 @@ public class BinaryTree < E > implements Serializable {
         public String toString ( ) {
             return data.toString ( );
         }
-    } // End of class Node
-} // End of class BinaryTree
+    }
+}

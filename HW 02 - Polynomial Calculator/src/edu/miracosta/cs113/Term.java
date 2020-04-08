@@ -40,7 +40,7 @@ public class Term implements Cloneable, Comparable {
      * @param coefficient The coefficient of the term.
      * @param exponent The term's exponent.
      */
-    public Term ( int coefficient, int exponent ) {
+    Term ( int coefficient, int exponent ) {
         this.coefficient = coefficient;
         this.exponent = exponent;
     }
@@ -60,7 +60,6 @@ public class Term implements Cloneable, Comparable {
         String exponentHalf = null;    // The portion that will hold the exponent String.
 
         if ( stringTerm.isEmpty () ) {
-
             System.out.println ( "Invalid input. Terminating program.\n" );
             System.exit ( 0 );
 
@@ -69,24 +68,20 @@ public class Term implements Cloneable, Comparable {
          * same, then we know there is no exponent.
          */
         } else if ( stringTerm.contains ( "x" ) && ( stringTerm.length () == stringTerm.indexOf ( "x" ) + 1 ) ) {
-
             coefficientHalf = stringTerm.substring ( 0, stringTerm.indexOf ( "x" ) );
             setExponent ( 1 );
 
         // String argument contains a variable, and an exponent.
         } else if ( stringTerm.contains ( "x" ) && ( stringTerm.length () > stringTerm.indexOf ( "x" ) + 1 ) ) {
-
             coefficientHalf = stringTerm.substring ( 0, stringTerm.indexOf ( "x" ) );
             exponentHalf = stringTerm.substring ( stringTerm.indexOf ( "x" ) + 1 );
             setExponent ( determineExponent ( exponentHalf ) );
 
         // String argument does not contain any variables.
         } else {
-
             coefficientHalf = stringTerm;
             setExponent ( 0 );
         }
-
         setCoefficient ( determineCoefficient ( coefficientHalf ) );
     }
 
@@ -212,7 +207,6 @@ public class Term implements Cloneable, Comparable {
             else
                 term = ( getCoefficient () + "x^" + getExponent () );
         }
-
         return term;
     }
 
@@ -348,7 +342,6 @@ public class Term implements Cloneable, Comparable {
         return coefficient;
     }
 
-
     /**
      * Determines the exponent based on the String input. The String will remove the "^" and determine if the String
      * contains a negative sign. If so, the number following the negative sign will be parsed and multiplied by -1.
@@ -358,8 +351,7 @@ public class Term implements Cloneable, Comparable {
      *      If the String contains a negative sign:
      *          The
      */
-    private static int determineExponent ( String exponentString ){
-
+    private static int determineExponent ( String exponentString ) {
         int exponent;
 
         exponentString = exponentString.substring ( exponentString.indexOf ( "^" ) + 1 );

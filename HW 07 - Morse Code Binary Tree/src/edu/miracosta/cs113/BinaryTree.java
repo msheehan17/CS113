@@ -49,7 +49,7 @@ public class BinaryTree < E > implements Serializable {
     /**
      * Constructs an empty binary tree.
      */
-    BinaryTree () {
+    BinaryTree ( ) {
         root = null;
     }
 
@@ -81,8 +81,8 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return The left subtree.
      */
-    BinaryTree<E> getLeftSubtree ( ) {
-        return (root != null && root.left != null) ? new BinaryTree < > ( root.left ) : null;
+    BinaryTree < E > getLeftSubtree ( ) {
+        return ( root != null && root.left != null ) ? new BinaryTree < > ( root.left ) : null;
     }
 
     /**
@@ -90,8 +90,8 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return The right subtree.
      */
-    BinaryTree<E> getRightSubtree () {
-        return (root != null && root.right != null) ? new BinaryTree < > ( root.right ) : null;
+    BinaryTree < E > getRightSubtree ( ) {
+        return ( root != null && root.right != null ) ? new BinaryTree < > ( root.right ) : null;
     }
 
     /**
@@ -99,8 +99,7 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return The data within the root.
      */
-    public E getData () {
-
+    E getData ( ) {
         return root.data;
     }
 
@@ -109,8 +108,7 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return Returns true if the calling node is a lead, false if not.
      */
-    public boolean isLeaf () {
-
+    boolean isLeaf ( ) {
         return ( root.left == null && root.right == null );
     }
 
@@ -146,8 +144,8 @@ public class BinaryTree < E > implements Serializable {
      * @param scan The Scanner object.
      * @return The appended binary tree.
      */
-    static BinaryTree<String> readBinaryTree ( Scanner scan ) {
-        String data = scan.next  ();
+    static BinaryTree < String > readBinaryTree ( Scanner scan ) {
+        String data = scan.next ( );
 
         if ( data.equals ( "null" ) )
             return null;

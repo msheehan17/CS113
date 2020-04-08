@@ -38,30 +38,23 @@ public class PolynomialDriver {
     // The Scanner object that will be used throughout the program.
     private static Scanner sc = new Scanner ( System.in );
 
-
     public static void main ( String[] args ) {
-
         programIntroduction ();
         mainMenuPrompt ();
-
-    } // End main.
-
+    }
 
     /**
      * Gives an introduction to the program.
      */
-    private static void programIntroduction () {
-
+    private static void programIntroduction ( ) {
         System.out.println ( "\nHello, and welcome to the Polynomial Calculator!" );
         System.out.println ( "I can show you what the sum of two polynomials would look like.\n" );
     }
 
-
     /**
      * Lists the main menu options.
      */
-    private static void listMainMenuOptions () {
-
+    private static void listMainMenuOptions ( ) {
         System.out.println ( "Please select from one of the following options:\n" );
         System.out.println ( "1. Create / edit the first polynomial." );
         System.out.println ( "2. Create / edit the second polynomial." );
@@ -69,20 +62,16 @@ public class PolynomialDriver {
         System.out.println ( "4. Quit the program.\n" );
     }
 
-
     /**
      * Prompts the user for their main menu selection.
      */
-    private static void mainMenuPrompt () {
-
-        int userSelection; // Selection made by user.
+    private static void mainMenuPrompt ( ) {
         boolean continueProgram; // Controls the outer do while loop. True as long as the user wants to continue.
 
         do {
-
             listMainMenuOptions ();
 
-            userSelection = ensureInputIsInteger ();
+            int userSelection = ensureInputIsInteger ();
 
             userSelection = ensureNumberIsWithinRange ( userSelection, 1, 4 );
 
@@ -92,9 +81,8 @@ public class PolynomialDriver {
 
             continueProgram = yesOrNo ();
 
-        } while ( continueProgram == true );
+        } while ( continueProgram );
     }
-
 
     /**
      * Based on the user's selection, activates the main menu option.
@@ -103,44 +91,26 @@ public class PolynomialDriver {
      *      The selection made by the user.
      */
     private static void mainMenuSelection ( int userSelection ) {
-
-        switch ( userSelection ) {
-
-            // Create / edit the first polynomial.
-            case 1:
+            if ( userSelection == 1 )
                 polynomialMenuPrompt ( "first" );
-                break;
-
-            // Create / edit the second polynomial.
-            case 2:
+            else if ( userSelection == 2 )
                 polynomialMenuPrompt ( "second" );
-                break;
-
-            // Add the two polynomials.
-            case 3:
-                addPolynomials ();
-                break;
-
-            // Quit the program.
-            case 4:
-                exitProgram ();
-                break;
-        }
+            else if ( userSelection == 3 )
+                addPolynomials ( );
+            else
+                exitProgram ( );
     }
-
 
     /**
      * Options for the polynomial menu.
      */
-    private static void listPolynomialMenuOptions () {
-
+    private static void listPolynomialMenuOptions ( ) {
         System.out.println ( "Please select from one of the following options:\n" );
         System.out.println ( "1. Create a polynomial." );
         System.out.println ( "2. Clear the polynomial." );
         System.out.println ( "3. Edit the polynomial." );
         System.out.println ( "4. Add a term to the polynomial.\n" );
     }
-
 
     /**
      * Prompts the user for their polynomial menu selection.
@@ -149,7 +119,6 @@ public class PolynomialDriver {
      *      The String indicating if the polynomial to work with is the first or second.
      */
     private static void polynomialMenuPrompt ( String polynomial ) {
-
         System.out.println ( "You have selected to work with the " + polynomial + " polynomial. What would you like to do?\n");
 
         int userSelection; // Selection made by user.
@@ -169,7 +138,7 @@ public class PolynomialDriver {
 
             continueProgram = yesOrNo ();
 
-        } while ( continueProgram == true );
+        } while (  continueProgram );
     }
 
 
@@ -212,7 +181,6 @@ public class PolynomialDriver {
      * will add both Strings and print a toString of the sum.
      */
     private static void addPolynomials () {
-
         if ( polyOne == null && polyTwo == null )
             System.out.println ( "Cannot add polynomials, neither polynomial has been set.\n" );
         else if ( polyOne == null )
@@ -225,25 +193,18 @@ public class PolynomialDriver {
         }
     }
 
-
     /**
      * Prompts the user if they would like to exit the program.
      */
     private static void exitProgram () {
-
-        boolean exitProgram;
-
         System.out.println ( "Wold you like to exit the program?" );
-
-        exitProgram = yesOrNo ();
+        boolean exitProgram = yesOrNo ();
 
         if ( exitProgram ) {
-
             System.out.println ( "Goodbye." );
             System.exit ( 0 );
         }
     }
-
 
     /**
      * Allows the user to create a new polynomial.
@@ -281,26 +242,21 @@ public class PolynomialDriver {
      *  The polynomial the user would like to clear.
      */
     private static void clearPolynomial ( String polynomial ) {
-
         if ( polynomial.equalsIgnoreCase ( "first" ) && polyOne != null ) {
-
             if ( polyOne.getNumTerms () == 0 )
                 System.out.println ( "The polynomial is already empty.\n" );
             else {
                 polyOne.clear ();
                 System.out.println ( "Polynomial cleared of all terms.\n" );
             }
-
         } else if ( polynomial.equalsIgnoreCase ( "second" ) && polyTwo != null )
-
-            if ( polyTwo.getNumTerms () == 0)
+            if ( polyTwo.getNumTerms ( ) == 0)
                 System.out.println ( "The polynomial is already empty.\n" );
             else {
-                polyTwo.clear ();
+                polyTwo.clear ( );
                 System.out.println ( "Polynomial cleared of all terms.\n" );
             }
     }
-
 
     /**
      * Allows the user to edit the polynomial.
@@ -309,17 +265,13 @@ public class PolynomialDriver {
      *      The polynomial you would like to edit.
      */
     private static void editPolynomial ( String polynomial ) {
-
         int userSelection; // The number of the term selected by the user.
         int coefficient;   // The coefficient entered by the user.
         int exponent;      // The exponent entered by the user.
 
         if ( polynomial.equalsIgnoreCase ( "first" ) ) {
-
             if ( checkPolynomial ( polyOne ) ) {
-
                 System.out.println ( "The polynomial doesn't have any terms. Creating polynomial now and adding x variable.\n" );
-
                 if ( polyOne == null )
                     polyOne = new Polynomial (  );
 
@@ -390,14 +342,8 @@ public class PolynomialDriver {
      *      Returns the coefficient entered by the user.
      */
     private static int getCoefficient () {
-
-        int coefficient; // The coefficient value given by the user.
-
         System.out.println ( "What coefficient would you like for your term?");
-
-        coefficient = ensureInputIsInteger ();
-
-        return coefficient;
+        return ensureInputIsInteger ( );
     }
 
 
@@ -407,17 +353,10 @@ public class PolynomialDriver {
      * @return
      *      Returns the exponent entered by the user.
      */
-    private static int getExponent () {
-
-        int exponent; // The exponent value given by the user.
-
+    private static int getExponent ( ) {
         System.out.println ( "What exponent would you like for your term?");
-
-        exponent = ensureInputIsInteger ();
-
-        return exponent;
+        return ensureInputIsInteger ( );
     }
-
 
     /**
      * Prompts the user for a yes or no input.
@@ -425,24 +364,17 @@ public class PolynomialDriver {
      * @return
      *      Returns true if the user enters yes (or its variations) as input. Returns false otherwise.
      */
-    private static boolean yesOrNo () {
-
-        String userSelection; // The yes or no response given by the user.
-
+    private static boolean yesOrNo ( ) {
         System.out.print ( "Your selection ( \"yes\" | \"no\" ): ");
-
-        userSelection = sc.next ( );
+        String userSelection = sc.next ( );
         System.out.println ( " " );
 
         switch ( userSelection ) {
-
             case "y": case "Y": case "yes": case "YES":
                 return true;
         }
-
         return false;
     }
-
 
     /**
      * Uses exception handling to ensure the user is entering an integer.
@@ -450,28 +382,23 @@ public class PolynomialDriver {
      * @return
      *      The number entered by the user.
      */
-    private static int ensureInputIsInteger () {
-
+    private static int ensureInputIsInteger ( ) {
         int theNumber = 0; // The number entered by the user.
         boolean validInput = false; // Controls the exception loop until the exception is resolved.
 
         System.out.print ( "Your selection: " );
 
-        while ( !validInput ) {
-
+        while ( ! validInput ) {
             try {
-
                 theNumber = sc.nextInt ();
                 System.out.println ( " " );
                 validInput = true;
-
-            } catch ( InputMismatchException e ) {
-
-                sc.nextLine ();
+            }
+            catch ( InputMismatchException e ) {
+                sc.nextLine ( );
                 System.out.print ( "Input must be a number 1 - 4. Try again: " );
             }
         }
-
         return theNumber;
     }
 
@@ -490,20 +417,15 @@ public class PolynomialDriver {
      *      The number given by the user, fixed (if applicable).
      */
     private static int ensureNumberIsWithinRange ( int numberGiven, int lowerlimit, int upperlimit ) {
-
         if ( numberGiven < lowerlimit || numberGiven > upperlimit ) {
-
             while ( numberGiven < lowerlimit || numberGiven > upperlimit ) {
-
                 System.out.print ( "Number must be between " + lowerlimit + " and " +  upperlimit + ". Try again: " );
                 numberGiven = sc.nextInt ();
                 System.out.println ( " " );
             }
         }
-
         return numberGiven;
     }
-
 
     /**
      * Checks if the selected polynomial is empty or null.
@@ -512,7 +434,6 @@ public class PolynomialDriver {
      *      The polynomial selected by the user.
      */
     private static boolean checkPolynomial ( Polynomial polynomial ){
-
-        return ( polynomial.getNumTerms () == 0 || polynomial == null );
+        return ( polynomial == null | polynomial.getNumTerms ( ) == 0  );
     }
 }

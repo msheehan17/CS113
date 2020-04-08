@@ -59,7 +59,6 @@ class Polynomial {
 
         if ( polynomialTerms.isEmpty () )
             return "0";
-
         else
             sb.append ( getTerm ( 0 ).toString ( ).substring ( polynomialTerms.get ( 0 ).toString ( ).charAt ( 0 ) == '+' ? 0 : 1 ) );
 
@@ -90,14 +89,12 @@ class Polynomial {
         return new Term ( polynomialTerms.get ( index ) );
     }
 
-
     /**
      * Clears the LinkedList of all terms.
      */
     void clear ( ) {
         polynomialTerms.clear ();
     }
-
 
     /**
      * Adds a term to the polynomial. If the argument term's exponent matches any exponent of a term already in
@@ -108,7 +105,6 @@ class Polynomial {
      * @param t The term being added to the polynomial.
      */
     void addTerm ( Term t ) {
-
         int index = -1;
         int sumOfCoefficients = 0;
         Term oldTerm;
@@ -116,37 +112,28 @@ class Polynomial {
         // If the LinkedList is empty, simply add the term.
         if ( polynomialTerms.isEmpty () )
             polynomialTerms.add ( t );
-
         else {
-
             // Determine if there are any matching exponents.
             for ( int i = 0; i < polynomialTerms.size (); i++ ) {
-
                 if ( t.getExponent () == polynomialTerms.get ( i ).getExponent () )
                     index = i;
             }
-
             // if any matching exponents are found a new term with the sum of the old and argument coefficients is made.
             if ( index != -1 ) {
-
                 oldTerm = polynomialTerms.remove ( index );
                 sumOfCoefficients = ( oldTerm.getCoefficient () + t.getCoefficient () );
 
                 // If the sum of coefficients doesn't cancel out the terms, then the new term will be added to the polynomial.
                 if ( sumOfCoefficients != 0)
                     polynomialTerms.add ( index, new Term ( sumOfCoefficients, t.getExponent () ) );
-
             } else {
-
                 // No matching exponents were found, see if the argument exponent is larger than any existing terms in the polynomial.
                 for ( int i = 0; i < polynomialTerms.size (); i++ ) {
-
                     if ( t.compareTo ( polynomialTerms.get ( i ) )  > 0 ) {
                         index = i;
                         break;
                     }
                 }
-
                 if ( index != -1 )
                     polynomialTerms.add ( index, t );
                 // The term argument does not have matching exponents, nor an exponent greater than any existing in the polynomial.
@@ -155,7 +142,6 @@ class Polynomial {
             }
         }
     }
-
 
     /**
      * Copies terms from the argument polynomial to the calling polynomial. This method uses addTerm, so this method

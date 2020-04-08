@@ -1,4 +1,4 @@
-package edu.miracosta.cs113.change;
+package edu.miracosta.cs113;
 
  // For this project, I chose an ArrayList because:
  // - Since we're adding to the end at all times, insertion is O(1).
