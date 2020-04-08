@@ -1,6 +1,6 @@
 package edu.miracosta.cs113;
 
-public class BinarySearchTree < E extends Comparable < E > >  extends BinaryTree < E > implements SearchTree < E > {
+class BinarySearchTree < E extends Comparable < E > >  extends BinaryTree < E > implements SearchTree < E > {
 
     protected boolean addReturn; // Return value from recursive add method.
     protected E deleteReturn; // Return value from recursive delete method.
@@ -13,7 +13,7 @@ public class BinarySearchTree < E extends Comparable < E > >  extends BinaryTree
     public boolean add ( E item ) {
         root = add ( root, item );
         return addReturn;
-    }
+    } 
 
     /**
      * The data field addReturn is set true if the item is added to the tree, false if the item is already in the tree.
