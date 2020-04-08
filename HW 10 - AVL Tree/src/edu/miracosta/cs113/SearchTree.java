@@ -6,9 +6,7 @@ package edu.miracosta.cs113;
  * @author Matthew Sheehan
  * @version 1.0
  *
- * Interface implemented with text from the book.
  */
-
 public interface SearchTree < E > {
 
     /**
