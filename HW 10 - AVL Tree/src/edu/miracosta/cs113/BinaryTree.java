@@ -11,9 +11,9 @@ import java.util.Scanner;
  *
  * @param <E> Generic to hold any data type
  */
-public class BinaryTree < E > implements Serializable {
+class BinaryTree < E > implements Serializable {
     /** The root node of this tree. */
-    protected Node<E> root;
+    protected Node < E > root;
 
     /**
      * Default constructor to build an empty BinaryTree.
@@ -38,23 +38,20 @@ public class BinaryTree < E > implements Serializable {
      * @param leftTree left subtree of root
      * @param rightTree right subtree of root
      */
-    public BinaryTree ( E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) {
+    BinaryTree ( E data, BinaryTree < E > leftTree, BinaryTree < E > rightTree) {
         // Set root to a new Node with the given data
-        root = new Node<E>(data);
+        root = new Node < E > ( data );
 
         // Set left subtree
-        if (leftTree != null) {
+        if (leftTree != null) 
             root.left = leftTree.root;
-        }
-        else {
+        else 
             root.left = null;
-        }
 
         // Set right subtree
         if (rightTree != null) {
             root.right = rightTree.root;
-        }
-        else {
+        } else {
             root.right = null;
         }
     }
@@ -64,11 +61,10 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return The left subtree, or null if either the root or left subtree is null
      */
-    public BinaryTree<E> getLeftSubtree() {
-        if (root != null && root.left != null) {
-            return new BinaryTree<E>(root.left);
-        }
-        else {
+    public BinaryTree < E > getLeftSubtree ( ) {
+        if ( root != null && root.left != null ) {
+            return new BinaryTree < E > ( root.left );
+        } else {
             return null;
         }
     }
@@ -92,8 +88,8 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return true if the root has no children
      */
-    public boolean isLeaf() {
-        return (root.left == null && root.right == null);
+    public boolean isLeaf ( ) {
+        return ( root.left == null && root.right == null );
     }
 
     /**
@@ -101,7 +97,7 @@ public class BinaryTree < E > implements Serializable {
      *
      * @return The data stored in the root
      */
-    public E getData() {
+    E getData ( ) {
         return root.data;
     }
 
@@ -114,9 +110,9 @@ public class BinaryTree < E > implements Serializable {
      * @param scan The Scanner attached to the input file
      * @return The binary tree constructed from the given input
      */
-    public static BinaryTree<String> readBinaryTree(Scanner scan) {
+    static BinaryTree < String > readBinaryTree ( Scanner scan ) {
         // Read a line and trim leading and trailing spaces.
-        if (!scan.hasNext()) {
+        if ( !scan.hasNext ( ) ) {
             return null;
         }
         else {
