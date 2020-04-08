@@ -25,7 +25,7 @@ import java.util.Queue;
  * @version 1.0
  *
  */
-public class HuffmanTree implements Serializable, HuffmanInterface {
+class HuffmanTree implements Serializable, HuffmanInterface {
 
     private static class HuffData implements Serializable {
 
@@ -63,7 +63,7 @@ public class HuffmanTree implements Serializable, HuffmanInterface {
      * character (identified in CHARACTERS array) within the String.
      * @param text The String used to determine symbol frequencies.
      */
-    public HuffmanTree ( String text ) {
+    HuffmanTree ( String text ) {
         // Stores the HuffData nodes containing the symbol and symbol weight.
         ArrayList < HuffData > nodes = new ArrayList < > (  );
 
