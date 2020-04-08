@@ -1,3 +1,5 @@
+package cs113.groupProject;
+
 /**
  * Vertex.java - The class for representing the vertex of a graph.
  *
@@ -15,23 +17,22 @@
  *
  * @author Matt Sheehan, Licol Zeinfeld, Paul Krupski
  */
-public class Vertex {
+class Vertex {
 
-    private String id;
-    private String name;
+    private String id, name;
 
     /**
      * Full constructor.
      * @param id The id of the vertex.
      * @param name The name of the vertex
      */
-    public Vertex ( String id, String name ) {
-        if ( id == null || id.equals ( "" ) )
+    Vertex ( String id, String name ) throws IllegalArgumentException {
+        if ( id.isEmpty ( ) )
             throw new IllegalArgumentException ( "Id must be valid." );
         else
             this.id = id;
 
-        if ( name == null || name.equals ( "" ) )
+        if ( name.isEmpty ( ) )
             throw new IllegalArgumentException ( "Name must be valid." );
         else
             this.name = name;
@@ -41,7 +42,7 @@ public class Vertex {
      * Returns the vertex's id.
      * @return The vertex's id.
      */
-    public String getId ( ) {
+    String getId ( ) {
         return id;
     }
 
@@ -49,7 +50,7 @@ public class Vertex {
      * Returns the information associated with the vertex (the "name").
      * @return The information associated with the vertex.
      */
-    public String getName ( ) {
+    String getName ( ) {
         return name;
     }
 
@@ -69,6 +70,7 @@ public class Vertex {
             return false;
         else
             other = ( Vertex ) obj;
+        
         return id.equals ( other.id );
     }
 
