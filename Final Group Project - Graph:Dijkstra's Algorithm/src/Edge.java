@@ -17,7 +17,7 @@
  *
  * @author Matt Sheehan, Licol Zeinfeld, Paul Krupski
  */
-public class Edge  {
+class Edge  {
 
     private String id;
     private Vertex source, destination;
