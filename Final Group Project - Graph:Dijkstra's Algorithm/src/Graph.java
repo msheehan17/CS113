@@ -1,3 +1,5 @@
+package cs113.groupProject;
+
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ class Graph {
      * @param vertexes The vertices to be represented in the graph.
      * @param edges The edges to be represented in the graph.
      */
-    public Graph ( List < Vertex > verticies, List < Edge > edges) {
+    Graph ( List < Vertex > verticies, List < Edge > edges) {
         this.vertices = vertices;
         this.edges = edges;
     }
@@ -33,7 +35,7 @@ class Graph {
      * Returns a list of vertices contained within the graph.
      * @return A list of vertices contained within the graph.
      */
-    public List < Vertex > getVertices ( ) {
+    List < Vertex > getVertices ( ) {
         return vertices;
     }
 
@@ -41,7 +43,7 @@ class Graph {
      * Returns a list of edges contained within the graph.
      * @return A list of edges contained within the graph.
      */
-    public List < Edge > getEdges ( ) {
+    List < Edge > getEdges ( ) {
         return edges;
     }
 }
