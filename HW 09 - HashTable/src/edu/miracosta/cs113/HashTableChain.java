@@ -20,9 +20,9 @@ import java.util.*;
  * @version 1.0
  *
  */
-public class HashTableChain < K, V >  implements Map < K, V > {
+class HashTableChain < K, V >  implements Map < K, V > {
 
-    private LinkedList < Entry < K, V > >[ ] table; // The table.
+    private LinkedList < Entry < K, V > > [ ] table; // The table.
     private int numKeys; // The number of keys (entries) in the table.
     private static final int CAPACITY = 101; // The size of the table.
     private static final double LOAD_THRESHOLD = 3.0; // The max load factor.
