@@ -1,3 +1,5 @@
+package cs113.groupProject;
+
 /**
  * Edge.java - A class to represent an edge between vertices.
  *
@@ -30,7 +32,7 @@ class Edge  {
      * @param destination The ending vertex of the edge (the ending point).
      * @param weight The weight of the edge between the two vertices.
      */
-    public Edge ( String id, Vertex source, Vertex destination, int weight ) {
+    Edge ( String id, Vertex source, Vertex destination, int weight ) {
         this.id = id;
         this.source = source;
         this.destination = destination;
@@ -41,7 +43,7 @@ class Edge  {
      * Returns the id of the edge.
      * @return The id of the edge.
      */
-    public String getId ( ) {
+    String getId ( ) {
         return id;
     }
 
@@ -49,7 +51,7 @@ class Edge  {
      * Returns the source vertex of the edge.
      * @return The source vertex of the edge.
      */
-    public Vertex getSource ( ) {
+    Vertex getSource ( ) {
         return source;
     }
 
@@ -57,7 +59,7 @@ class Edge  {
      * Returns the destination vertex of the edge.
      * @return The destination vertex of the edge.
      */
-    public Vertex getDestination ( ) {
+    Vertex getDestination ( ) {
         return destination;
     }
 
@@ -65,7 +67,7 @@ class Edge  {
      * Returns the weight of the edge.
      * @return The weight of the edge.
      */
-    public int getWeight ( ) {
+    int getWeight ( ) {
         return weight;
     }
 
