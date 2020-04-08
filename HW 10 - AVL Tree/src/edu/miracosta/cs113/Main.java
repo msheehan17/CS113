@@ -16,14 +16,13 @@ package edu.miracosta.cs113;
  * @author Matt Sheehan
  * @version 1.0
  */
-
-public class Main {
+class Main {
 
     private static int [ ] randomNumbers = new int [ 20 ];
     private static BinarySearchTree < Integer > bst = new BinarySearchTree < > ( );
     private static AVLTree < Integer > avl = new AVLTree < > ( );
 
-    public static void main ( String [] args ) {
+    public static void main ( String [ ] args ) {
         runProgram ( );
     } // end main.
 
