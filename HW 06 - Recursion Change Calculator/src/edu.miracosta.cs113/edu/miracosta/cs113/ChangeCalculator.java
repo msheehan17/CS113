@@ -1,9 +1,5 @@
 package edu.miracosta.cs113;
 
- // For this project, I chose an ArrayList because:
- // - Since we're adding to the end at all times, insertion is O(1).
- //- Traversing the ArrayList will be O(1), opposite a LinkedList's O(n).
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -20,10 +16,9 @@ import java.util.Collections;
  * NOTE: An additional method, printCombinationsToFile(int), has been added for the equivalent tester file to
  * verify that all given coin combinations are unique.
  */
+class ChangeCalculator {
 
-public class ChangeCalculator {
-
-    private static ArrayList< int[] > changeCombinations = new ArrayList <> ();
+    private static ArrayList < int[ ] > changeCombinations = new ArrayList < > ( );
     private static final String FILE_NAME = "CoinCombinations.txt";
 
     /**
@@ -38,8 +33,7 @@ public class ChangeCalculator {
      * @param cents a monetary value in cents
      * @return the total number of unique combinations of coins of which the given value is comprised
      */
-    public static int calculateChange ( int cents ) throws IllegalArgumentException {
-
+    static int calculateChange ( int cents ) throws IllegalArgumentException {
         if ( cents < 0 )
             throw new IllegalArgumentException ( "Numbers must be positive." );
 
@@ -51,10 +45,10 @@ public class ChangeCalculator {
         // Reverse the order of the ArrayList, since it starts with penny values first.
         Collections.reverse ( changeCombinations );
 
-        for ( int[] array : changeCombinations )
+        for ( int [ ] array : changeCombinations )
             System.out.println ( "[ " + array [0] + ", " + array [1] + ", " + array [2] + ", " + array [3] + " ]" );
 
-        return changeCombinations.size ();
+        return changeCombinations.size ( );
     }
 
     /**
@@ -71,15 +65,13 @@ public class ChangeCalculator {
      * @param pennies The number of pennies.
      */
     private static void makeChange ( int quarters, int dimes, int nickels, int pennies ) {
-
         // First we determine if this is a new combination, if so, then we can add it to the ArrayList
-        for ( int[] array : changeCombinations ) {
-
-            if ( array[0] == quarters && array[1] == dimes && array[2] == nickels && array[3] == pennies )
+        for ( int [ ] array : changeCombinations ) {
+            if ( array [ 0 ] == quarters && array [ 1 ] == dimes && array [ 2 ] == nickels && array [ 3 ] == pennies )
                 return;
         }
 
-        int[] newCombo = { quarters, dimes, nickels, pennies };
+        int [ ] newCombo = { quarters, dimes, nickels, pennies };
 
         changeCombinations.add ( newCombo );
 
@@ -108,30 +100,26 @@ public class ChangeCalculator {
      *
      * @param cents a monetary value in cents
      */
-    public static void printCombinationsToFile ( int cents ) {
-
+    static void printCombinationsToFile ( int cents ) {
         calculateChange ( cents );
-
         PrintWriter output = null;
 
         try {
-
             output = new PrintWriter ( new FileOutputStream ( FILE_NAME ) );
-
-        } catch ( FileNotFoundException e ) {
-
+        } 
+        catch ( FileNotFoundException e ) {
             System.out.println ( "CoinCombinations.txt file not found." );
             System.exit ( 0 );
         }
 
         // Clear the list from any previous makeChange method calls.
-        changeCombinations.clear ();
+        changeCombinations.clear ( );
 
         // Reverse the order of the ArrayList, since it starts with penny values first.
         Collections.reverse ( changeCombinations );
 
         for ( int[] array : changeCombinations )
-            output.println ( "[ " + array[ 0 ] + ", " + array[ 1 ] + ", " + array[ 2 ] + ", " + array[ 3 ] + " ]" );
+            output.println ( "[ " + array [ 0 ] + ", " + array [ 1 ] + ", " + array [ 2 ] + ", " + array [ 3 ] + " ]" );
 
         output.close ();
     }
