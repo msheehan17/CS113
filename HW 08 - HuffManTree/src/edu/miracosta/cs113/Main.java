@@ -1,5 +1,8 @@
 package edu.miracosta.cs113;
 
+import java.io.*;
+import java.util.Scanner;
+
 /**
  * Main.java - The driver program for our HuffmanTree demonstration.
  *
@@ -26,19 +29,15 @@ package edu.miracosta.cs113;
  * @version 1.0
  *
  */
-
-import java.io.*;
-import java.util.Scanner;
-
-public class Main {
+class Main {
 
     private static final String ORIGINAL_FILE_NAME = "webFile.txt"; // The name of the original file generated.
     private static final String ENCODED_FILE_NAME  = "encode.txt";  // The name of the encoded file.
     private static final String DECODED_FILE_NAME  = "decode.txt";  // The name of the decoded file.
     private static HuffmanTree huff = null; // The HuffmanTree object that will be used throughout the program.
 
-    public static void main ( String[] args ) {
-        runProgram ();
+    public static void main ( String[ ] args ) {
+        runProgram ( );
     }
 
     /**
@@ -46,22 +45,22 @@ public class Main {
      */
     private static void runProgram ( ) {
         // Prompt the user for their web page.
-        buildHTMLFile ();
+        buildHTMLFile ( );
 
         // Build the HuffmanTree
         huff = new HuffmanTree ( getFileAsString ( ORIGINAL_FILE_NAME ) );
 
         // Encode the file to another file.
-        createEncodedFile ();
+        createEncodedFile ( );
 
         // Decode the file to another file.
-        createDecodedFile ();
+        createDecodedFile ( );
 
         // Display the number of bits for each file, and the final compression rate.
-        getOriginalFileBits ();
-        getEncodedFileBits ();
-        getDecodedFileBits ();
-        determineCompressionRate ();
+        getOriginalFileBits ( );
+        getEncodedFileBits ( );
+        getDecodedFileBits ( );
+        determineCompressionRate ( );
     }
 
     /**
@@ -75,13 +74,13 @@ public class Main {
         while ( !validInput ) {
             try {
                 System.out.print ( "Please enter the URL of the website you would like to take the text from: " );
-                userGivenURL = sc.nextLine ();
+                userGivenURL = sc.nextLine ( );
                 TextFileGenerator.makeCleanFile ( userGivenURL, ORIGINAL_FILE_NAME );
                 validInput = true;
 
             } catch ( IOException e ) {
                 System.out.println ( "File could not be created." );
-                sc.nextLine (); // clear buffer.
+                sc.nextLine ( ); // clear buffer.
             }
         }
     }
@@ -94,20 +93,21 @@ public class Main {
      */
     private static String getFileAsString ( String fileName ) {
         Scanner input = null;
-        StringBuilder sb = new StringBuilder ();
+        StringBuilder sb = new StringBuilder ( );
 
         try {
             input = new Scanner ( new FileInputStream ( fileName ) );
-
-        } catch ( FileNotFoundException e ) {
+        } 
+        catch ( FileNotFoundException e ) {
             System.out.println ( fileName + " file not found." );
         }
 
-        while ( input.hasNext () ) {
+        while ( input.hasNext ( ) ) {
             sb.append ( input.nextLine () );
         }
-        input.close ();
-        return sb.toString ();
+        
+        input.close ( );
+        return sb.toString ( );
     }
 
     /**
@@ -123,7 +123,7 @@ public class Main {
             System.out.println ( ENCODED_FILE_NAME + " file not found." );
         }
         output.println ( huff.encode ( getFileAsString ( ORIGINAL_FILE_NAME ) ) );
-        output.close ();
+        output.close ( );
     }
 
     /**
@@ -134,12 +134,12 @@ public class Main {
 
         try {
             output = new PrintWriter ( new FileOutputStream ( DECODED_FILE_NAME ) );
-
-        } catch ( FileNotFoundException e ) {
+        } 
+        catch ( FileNotFoundException e ) {
             System.out.println ( DECODED_FILE_NAME + " file not found." );
         }
         output.println ( huff.decode ( getFileAsString ( ENCODED_FILE_NAME ) ) );
-        output.close ();
+        output.close ( );
     }
 
     /**
