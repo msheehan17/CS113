@@ -1,3 +1,12 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * DijkstraAlgorithm.java - A class for using Dijkstra's algorithm.
  *
@@ -21,16 +30,7 @@
  *      - getShortDistance (Vertex): Returns the shortest distance.
  *      - getPath (Vertex): Returns a path between the target vertex and all predecessors.
  */
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-public class DijkstraAlgorithm {
+class DijkstraAlgorithm {
 
     private final List < Vertex > nodes;
     private final List < Edge > edges;
@@ -44,8 +44,8 @@ public class DijkstraAlgorithm {
      * @param graph The graph Dijkstra's will copy the vertices and edges from.
      */
     public DijkstraAlgorithm ( Graph graph ) {
-        this.nodes = new ArrayList < > ( graph.getVertices ( ) );
-        this.edges = new ArrayList < > ( graph.getEdges ( ) );
+        nodes = new ArrayList < > ( graph.getVertices ( ) );
+        edges = new ArrayList < > ( graph.getEdges ( ) );
     }
 
     /**
@@ -94,7 +94,7 @@ public class DijkstraAlgorithm {
             if ( edge.getSource ( ).equals ( node ) && edge.getDestination ( ).equals ( target ) )
                 return edge.getWeight ( );
         }
-        return 0;
+        return 0; // Distance not found.
     }
 
     /**
@@ -159,7 +159,7 @@ public class DijkstraAlgorithm {
      * @return A path between the target vertex and all predecessors.
      */
     public LinkedList < Vertex > getPath ( Vertex target ) {
-        LinkedList<Vertex> path = new LinkedList < > ( );
+        LinkedList < Vertex > path = new LinkedList < > ( );
         Vertex step = target;
 
         // check if a path exists
