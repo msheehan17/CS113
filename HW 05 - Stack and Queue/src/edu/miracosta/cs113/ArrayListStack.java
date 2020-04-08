@@ -24,7 +24,7 @@ import java.util.EmptyStackException;
  * @version 1.0
  *
  */
-public class ArrayListStack < E > implements StackInterface < E > {
+class ArrayListStack < E > implements StackInterface < E > {
 
     private static final int INITIAL_CAPACITY = 10;
     private E [ ] theData;
