@@ -1,6 +1,6 @@
 package edu.miracosta.cs113;
 
-public class AVLTree < E extends Comparable < E > > extends BinarySearchTreeWithRotate < E > {
+class AVLTree < E extends Comparable < E > > extends BinarySearchTreeWithRotate < E > {
 
     /**
      * Class to represent an AVL Node. It extends the BinaryTree.Node by adding the balance field.
@@ -40,7 +40,7 @@ public class AVLTree < E extends Comparable < E > > extends BinarySearchTreeWith
      *
      * Method implemented with text from the book.
      */
-    public boolean add ( E item ) {
+    boolean add ( E item ) {
         increase = false;
         root = add ( ( AVLNode < E > ) root, item );
         return addReturn;
