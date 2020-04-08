@@ -1,3 +1,5 @@
+package cs113.groupProject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,7 +45,7 @@ class DijkstraAlgorithm {
      * Full constructor.
      * @param graph The graph Dijkstra's will copy the vertices and edges from.
      */
-    public DijkstraAlgorithm ( Graph graph ) {
+    DijkstraAlgorithm ( Graph graph ) {
         nodes = new ArrayList < > ( graph.getVertices ( ) );
         edges = new ArrayList < > ( graph.getEdges ( ) );
     }
@@ -52,7 +54,7 @@ class DijkstraAlgorithm {
      * Performs the path traversal to determine the shortest path.
      * @param source The starting vertex.
      */
-    public void execute ( Vertex source ) {
+    void execute ( Vertex source ) {
         settledNodes = new HashSet < > ( );
         unSettledNodes = new HashSet < > ( );
         distance = new HashMap < > ( );
@@ -72,7 +74,7 @@ class DijkstraAlgorithm {
      * Finds the minimal distance based on the starting vertex.
      * @param node The starting vertex.
      */
-    private void findMinimalDistances ( Vertex node ) {
+    void findMinimalDistances ( Vertex node ) {
         List < Vertex > adjacentNodes = getNeighbors ( node );
         for ( Vertex target : adjacentNodes ) {
             if ( getShortestDistance ( target ) > ( getShortestDistance ( node ) + getDistance ( node, target ) ) ){
@@ -89,7 +91,7 @@ class DijkstraAlgorithm {
      * @param target The ending vertex.
      * @return The distance (a sum of the weights/path).
      */
-    private int getDistance ( Vertex node, Vertex target ) {
+    int getDistance ( Vertex node, Vertex target ) {
         for ( Edge edge : edges ) {
             if ( edge.getSource ( ).equals ( node ) && edge.getDestination ( ).equals ( target ) )
                 return edge.getWeight ( );
@@ -102,7 +104,7 @@ class DijkstraAlgorithm {
      * @param node The vertex to determine neighboring vertices.
      * @return A list of neighboring vertices.
      */
-    private List < Vertex > getNeighbors ( Vertex node ) {
+    List < Vertex > getNeighbors ( Vertex node ) {
         List < Vertex > neighbors = new ArrayList < > ( );
         for ( Edge edge : edges ) {
             if ( edge.getSource ( ).equals ( node ) && ( !isSettled ( edge.getDestination ( ) ) ) )
@@ -116,7 +118,7 @@ class DijkstraAlgorithm {
      * @param vertices The starting vertices.
      * @return The shortest distance vertex.
      */
-    private Vertex getMinimum ( Set < Vertex > vertices ) {
+    Vertex getMinimum ( Set < Vertex > vertices ) {
         Vertex minimum = null;
 
         for ( Vertex vertex : vertices ) {
@@ -135,7 +137,7 @@ class DijkstraAlgorithm {
      * @param vertex The vertex in question.
      * @return True if the vertex has been traversed, false if not.
      */
-    private boolean isSettled ( Vertex vertex ) {
+    boolean isSettled ( Vertex vertex ) {
         return settledNodes.contains ( vertex );
     }
 
@@ -144,7 +146,7 @@ class DijkstraAlgorithm {
      * @param destination The destination vertex.
      * @return The shortest distance.
      */
-    private int getShortestDistance ( Vertex destination ) {
+    int getShortestDistance ( Vertex destination ) {
         // Should a distance not exist, return infinity.
         if ( distance.get ( destination ) == null )
             return Integer.MAX_VALUE;
@@ -158,7 +160,7 @@ class DijkstraAlgorithm {
      * @param target The target vertex.
      * @return A path between the target vertex and all predecessors.
      */
-    public LinkedList < Vertex > getPath ( Vertex target ) {
+    LinkedList < Vertex > getPath ( Vertex target ) {
         LinkedList < Vertex > path = new LinkedList < > ( );
         Vertex step = target;
 
