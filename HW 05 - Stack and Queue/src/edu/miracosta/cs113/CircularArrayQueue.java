@@ -28,7 +28,7 @@ import java.util.Queue;
  * @version 1.0
  *
  */
-public class CircularArrayQueue < E > implements Queue < E > {
+class CircularArrayQueue < E > implements Queue < E > {
 
     private E [ ] theData; // The underlying array that will hold the information.
     private int capacity, front, rear, size; // The characteristics of the CircularArrayQueue.
