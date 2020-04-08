@@ -1,3 +1,15 @@
+package cs113.groupProject;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Main.java - A map of MiraCosta to help new students get around in the quickest way possible.
  *
@@ -22,17 +34,7 @@
  *
  * @author Matt Sheehan, Paul Krupski, Licol Zeifeld.
  */
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-public class Main extends JFrame implements ActionListener {
+class Main extends JFrame implements ActionListener {
 
     // The name of the JFrame.
     private static final String FRAME_TITLE = "MiraCosta Map";
@@ -45,8 +47,10 @@ public class Main extends JFrame implements ActionListener {
     private static final Border BLACK_LINE_BORDER = BorderFactory.createLineBorder ( Color.BLACK );
 
     // An array of names of the radio buttons;
-    private static final String [ ] BUTTON_NAMES = { "Entry 3", "Gym", "Entry 2", "Financial Aid", "Horticulture",
-            "Math Dept.", "Entry 1", "Book Store", "Library", "Computer Science Dept.", "Science Dept." };
+    private static final String [ ] BUTTON_NAMES = { 
+    "Entry 3", "Gym", "Entry 2", "Financial Aid", "Horticulture", "Math Dept.", "Entry 1", "Book Store", "Library", 
+    "Computer Science Dept.", "Science Dept." 
+    };
 
     // The start and end radio buttons for the user to select from.
     private static JRadioButton entry3Start = null, gymStart = null, entry2Start = null, finAidStart = null,
@@ -72,9 +76,11 @@ public class Main extends JFrame implements ActionListener {
     private static JTextArea directionsText;
 
     // An array of ids for the edges being entered into the graph.
-    private static final String [ ] EDGE_IDS = { "Edge_0", "Edge_1", "Edge_2", "Edge_3", "Edge_1", "Edge_1",
-            "Edge_4", "Edge_5", "Edge_6", "Edge_1", "Edge_7", "Edge_8", "Edge_9", "Edge_1", "Edge_1", "Edge_10", "Edge_1",
-            "Edge_11", "Edge_1", "Edge_12", "Edge_1", "Edge_1", "Edge_1", "Edge_1", "Edge_1" };
+    private static final String [ ] EDGE_IDS = { 
+    "Edge_0", "Edge_1", "Edge_2", "Edge_3", "Edge_1", "Edge_1",  "Edge_4", "Edge_5", "Edge_6", "Edge_1", "Edge_7", 
+    "Edge_8", "Edge_9", "Edge_1", "Edge_1", "Edge_10", "Edge_1","Edge_11", "Edge_1", "Edge_12", "Edge_1", "Edge_1", 
+    "Edge_1", "Edge_1", "Edge_1" 
+    };
 
     // An array of the number associated with the starting vertices.
     private static final int [ ] SOURCE_VERTEX_NUMBERS = { 0, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 6, 7, 7, 8, 8,
