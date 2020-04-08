@@ -25,14 +25,14 @@ import java.util.Scanner;
  * @version 1.0
  *
  */
-public class MorseCodeTree extends BinaryTree<Character> implements Serializable {
+class MorseCodeTree extends BinaryTree < Character > implements Serializable {
 
     private static final String FILE_NAME = "";
 
     /**
      * Creates a new MorseCodeTree and adds letters to the tree.
      */
-    public MorseCodeTree ( ) {
+    MorseCodeTree ( ) {
         root = new Node < >(' ');
         readMorseCodeTree ();
     }
@@ -52,7 +52,7 @@ public class MorseCodeTree extends BinaryTree<Character> implements Serializable
      * @throws NullPointerException If the String argument is null.
      * @throws IllegalArgumentException If the String contains illegal characters, or exceed legal String length (4).
      */
-    public String translateFromMorseCode ( String morseCode ) throws NullPointerException, IllegalArgumentException {
+    String translateFromMorseCode ( String morseCode ) throws NullPointerException, IllegalArgumentException {
         if ( morseCode.isEmpty ( ) )  // The String is empty or null.
             throw new NullPointerException ( "Null String." );
 
@@ -74,9 +74,9 @@ public class MorseCodeTree extends BinaryTree<Character> implements Serializable
         StringBuilder translatedString = new StringBuilder (  );
 
         for ( String segment : codeSegments ) {
-            Node<Character> currentNode = this.root; // The starting node for translation.
+            Node < Character > currentNode = this.root; // The starting node for translation.
 
-            for ( int i = 0; i < segment.length (); i++ ){
+            for ( int i = 0; i < segment.length ( ); i++ ){
                 if ( segment.charAt ( i ) == '*' )
                     currentNode = currentNode.left;
                 else if ( segment.charAt ( i ) == '-' )
