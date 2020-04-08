@@ -34,14 +34,11 @@ import java.util.Scanner;
  * @author Matthew Sheehan
  * @version 1.0
  */
+class MorseCodeDriver {
 
-public class MorseCodeDriver {
+    private static final String FILE_NAME = "";
 
-    private static final String FILE_NAME =
-    "/Users/matthewsheehan/Desktop/Code/cs113-hw07-morsecodetree-msheehan17/src/edu/miracosta/cs113/Morse_Code.txt";
-
-    public static void main ( String[] args ) {
-
+    public static void main ( String[ ] args ) {
         runProgram ();
     }
 
@@ -49,7 +46,6 @@ public class MorseCodeDriver {
      * Provides the interface for the user to translate morse code.
      */
     private static void runProgram ( ) {
-
         boolean continueProgram = true; // Determines if the user would like to continue using the program.
 
         System.out.println ( "Hello, and welcome to the morse code program.\n" );
@@ -69,7 +65,6 @@ public class MorseCodeDriver {
             System.out.println ( "Would you like to continue using the program?" );
             continueProgram = yesOrNoInput ( );
         }
-
         // User has opted to quit using the program.
         System.out.println ( "Goodbye.\n" );
         System.exit ( 0 );
@@ -79,7 +74,6 @@ public class MorseCodeDriver {
      * Provides the user a list of options available in the program.
      */
     private static void menuOptions ( ) {
-
         System.out.println ( "Please choose from one of the following options:" );
         System.out.println ( "\t1. Display all letters and their morse code.");
         System.out.println ( "\t2. Translated morse code from a text file." );
@@ -92,18 +86,15 @@ public class MorseCodeDriver {
      * @return The user's legal argument.
      */
     private static int checkMenuSelection ( ) {
-
         int userSelection = 0; // The number chosen by the user.
         boolean validInput = false;
 
         Scanner sc = new Scanner ( System.in );
-
         System.out.print ( "Your selection: ");
 
         while ( ! validInput ) {
 
             try {
-
                 userSelection = sc.nextInt ( );
                 System.out.println ( " " );
 
@@ -111,19 +102,15 @@ public class MorseCodeDriver {
                     throw new IllegalArgumentException ( "Input must be a valid number, 1 - 3. Try again: " );
 
                 validInput = true;
-
-            } catch ( InputMismatchException e ) {
-
+            } 
+            catch ( InputMismatchException e ) {
                 System.out.print ( "Input must be a valid number, 1 - 3. Try again: " );
-
-            } catch ( IllegalArgumentException e ) {
-
+            } 
+            catch ( IllegalArgumentException e ) {
                 e.getMessage ();
             }
-
-            sc.nextLine (); // Clear buffer.
+            sc.nextLine ( ); // Clear buffer.
         }
-
         return userSelection;
     }
 
@@ -133,9 +120,7 @@ public class MorseCodeDriver {
      * @param userSelection The menu option's corresponding number.
      */
     private static void selectionChosen ( int userSelection ) {
-
         switch ( userSelection ) {
-
             case 1:
                 menuOptionOne ( );
                 break;
@@ -146,7 +131,6 @@ public class MorseCodeDriver {
                 menuOptionThree ( );
                 break;
         }
-
         System.out.println ( " " );
     }
 
@@ -157,37 +141,30 @@ public class MorseCodeDriver {
      *
      */
     private static void menuOptionOne ( ) {
-
         MorseCodeTree translator = new MorseCodeTree ( );
         Scanner input = null;
 
-        ArrayList<String> morseCodeSegments = new ArrayList<> ( 26 ); // Stores the morse code in each line.
-        char[] letters = new char [ 26 ]; // Stores the letter after morse code translation.
+        ArrayList < String > morseCodeSegments = new ArrayList < > ( 26 ); // Stores the morse code in each line.
+        char [ ] letters = new char [ 26 ]; // Stores the letter after morse code translation.
 
         try {
-
             input = new Scanner ( new FileInputStream ( FILE_NAME ) );
-
-        } catch ( FileNotFoundException e ) {
-
+        } 
+        catch ( FileNotFoundException e ) {
             System.out.println ( FILE_NAME + " file not found." );
         }
 
         // Take in morse code segments from file.
-        while ( input.hasNext ( ) ) {
-
+        while ( input.hasNext ( ) ) 
             morseCodeSegments.add ( input.nextLine (  ).substring ( 2 ) );
-        }
+        
 
         // Translate the segments, using MorseCodeTree as per the instructions.
-        for ( int i = 0; i < morseCodeSegments.size ( ); i++) {
-
+        for ( int i = 0; i < morseCodeSegments.size ( ); i++) 
             letters [ i ] = ( translator.translateFromMorseCode ( morseCodeSegments.get ( i ) ).charAt ( 0 ) );
-        }
 
         // Print the segments and letters to the screen.
         for ( int i = 0; i < morseCodeSegments.size ( ); i++ ) {
-
             System.out.printf ( "Morse Code: %-4s ", morseCodeSegments.get ( i ) );
             System.out.printf ( "  Letter: %2s", letters [ i ] );
             System.out.println ( " " );
@@ -198,7 +175,6 @@ public class MorseCodeDriver {
      * Prompts the user for the file name containing morse code, then translates the information from the file.
      */
     private static void menuOptionTwo ( ) {
-
         MorseCodeTree translator = new MorseCodeTree ( ); // The object for performing the morse code translation.
         Scanner sc = new Scanner ( System.in ); // The Scanner that will take in the name of the file.
         Scanner input = null; // The Scanner that will take input from the file itself.
@@ -210,23 +186,18 @@ public class MorseCodeDriver {
         String fileName = sc.nextLine ( );
 
         while ( ! validInput ) {
-
             try {
-
                 input = new Scanner ( new FileInputStream ( fileName ) );
                 validInput = true;
-
-            } catch ( FileNotFoundException e ) {
-
+            } 
+            catch ( FileNotFoundException e ) {
                 System.out.print ( fileName + " file not found. Try again: ");
                 sc.nextLine(); // Clear buffer.
             }
         }
 
-        while ( input.hasNext ( ) ) {
-
+        while ( input.hasNext ( ) ) 
             bigString += input.nextLine ( );
-        }
 
         System.out.println ( translator.translateFromMorseCode ( bigString ) );
     }
@@ -235,7 +206,6 @@ public class MorseCodeDriver {
      * Translates a String input by the user into morse code.
      */
     private static void menuOptionThree ( ) {
-
         Scanner sc = new Scanner ( System.in ); // Take in user input.
         MorseCodeTree translator = new MorseCodeTree ( ); // The object for translating the morse code.
 
@@ -244,20 +214,16 @@ public class MorseCodeDriver {
         System.out.print ( "Please enter the morse code you would like to translate: " );
 
         while ( ! validInput ) {
-
             try {
-
                 String userInput = sc.nextLine ( );
                 System.out.println ( "Translated: " + translator.translateFromMorseCode ( userInput ) );
                 validInput = true;
-
-            } catch ( NullPointerException e ) {
-
-                System.out.print ( e.getMessage () + ". Try again: " );
-
-            } catch ( IllegalArgumentException e ) {
-
-                System.out.print ( e.getMessage () + ". Try again: " );
+            } 
+            catch ( NullPointerException e ) {
+                System.out.print ( e.getMessage ( ) + ". Try again: " );
+            } 
+            catch ( IllegalArgumentException e ) {
+                System.out.print ( e.getMessage ( ) + ". Try again: " );
             }
         }
     }
@@ -268,19 +234,16 @@ public class MorseCodeDriver {
      * @return true if user enters "yes" or its variants, false otherwise.
      */
     private static boolean yesOrNoInput ( ) {
-
         Scanner sc = new Scanner ( System.in );
-
         System.out.print ( "Your selection: " );
 
         String userInput = sc.next ( );
 
         System.out.println ( " " );
 
-        userInput = userInput.toLowerCase ();
+        userInput = userInput.toLowerCase ( );
 
         switch ( userInput ) {
-
             case "yes": case "y":
                 return true;
         }
