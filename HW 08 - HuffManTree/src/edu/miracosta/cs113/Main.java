@@ -71,14 +71,14 @@ class Main {
         String userGivenURL; // The URL specified by the user.
         boolean validInput = false; // Controls the exception until the user can enter a valid URL.
 
-        while ( !validInput ) {
+        while ( ! validInput ) {
             try {
                 System.out.print ( "Please enter the URL of the website you would like to take the text from: " );
                 userGivenURL = sc.nextLine ( );
                 TextFileGenerator.makeCleanFile ( userGivenURL, ORIGINAL_FILE_NAME );
                 validInput = true;
-
-            } catch ( IOException e ) {
+            } 
+            catch ( IOException e ) {
                 System.out.println ( "File could not be created." );
                 sc.nextLine ( ); // clear buffer.
             }
@@ -102,9 +102,8 @@ class Main {
             System.out.println ( fileName + " file not found." );
         }
 
-        while ( input.hasNext ( ) ) {
+        while ( input.hasNext ( ) ) 
             sb.append ( input.nextLine () );
-        }
         
         input.close ( );
         return sb.toString ( );
@@ -118,8 +117,8 @@ class Main {
 
         try {
             output = new PrintWriter ( new FileOutputStream ( ENCODED_FILE_NAME ) );
-
-        } catch ( FileNotFoundException e ) {
+        } 
+        catch ( FileNotFoundException e ) {
             System.out.println ( ENCODED_FILE_NAME + " file not found." );
         }
         output.println ( huff.encode ( getFileAsString ( ORIGINAL_FILE_NAME ) ) );
