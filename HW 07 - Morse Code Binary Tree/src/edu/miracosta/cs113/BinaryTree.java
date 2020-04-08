@@ -27,7 +27,7 @@ import java.util.Scanner;
  *        root down the left sub-tree, then down the right subtree) and returns a String representation of said traversal.
  *      -readBinaryTree (Scanner): Returns a copy of the calling BinaryTree.
  */
-public class BinaryTree < E > implements Serializable {
+class BinaryTree < E > implements Serializable {
 
     protected static class Node < E > implements Serializable {
 
