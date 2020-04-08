@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Graph.java - A representation of a graph containing edges and vertices.
  *
@@ -12,9 +14,7 @@
  *
  * @author Matt Sheehan, Licol Zeinfeld, Paul Krupski
  */
-import java.util.List;
-
-public class Graph {
+class Graph {
 
     private List < Vertex > vertices;
     private List < Edge > edges;
@@ -24,8 +24,8 @@ public class Graph {
      * @param vertexes The vertices to be represented in the graph.
      * @param edges The edges to be represented in the graph.
      */
-    public Graph ( List < Vertex > vertexes, List < Edge > edges) {
-        this.vertices = vertexes;
+    public Graph ( List < Vertex > verticies, List < Edge > edges) {
+        this.vertices = vertices;
         this.edges = edges;
     }
 
